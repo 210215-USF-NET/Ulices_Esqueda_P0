@@ -1,6 +1,6 @@
 namespace SUI
 {
-    public class IMenu
+    public interface IMenu
     {
         void Start();
     }
