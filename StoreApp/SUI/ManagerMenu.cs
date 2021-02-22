@@ -2,7 +2,7 @@ namespace SUI
 {
     public class ManagerMenu : IMenu
     {
-        //Handles when a manager enters the StoreApp
+        //Handles when a Manager enters the StoreApp
         public void Start(){
 
         }
