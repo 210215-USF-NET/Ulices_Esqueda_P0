@@ -29,6 +29,11 @@ namespace SUI
             Might want to add a store model. To hold name of store, owner/manager, and inventory.
             At the end of the transaction you can go back to the main menu. 
             */
+
+            IMenu startMenu = new StartMenu();
+            startMenu.Start();
+
+            
         }
     }
 }
