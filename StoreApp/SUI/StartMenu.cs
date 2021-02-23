@@ -4,18 +4,16 @@ namespace SUI
 {
     public class StartMenu : IMenu
     {
-        private bool customer = false;
-
-        private bool manager = false;
 
         //Handles the beginning and deternimes if a person is a customer or manager.
         public void Start(){
 
             //Menu Start
             Console.WriteLine("Welcome to NoxInc Store Application!");
-            Console.WriteLine("Are you a returning Customer or a Manager?");
+            Console.WriteLine("Are you a Customer or a Manager?");
             Console.WriteLine("[0] I am a Customer");
             Console.WriteLine("[1] I am a Manager");
+            Console.WriteLine("[Q] Press 'q' to exit.");
 
             bool stay = true;
             do
@@ -27,11 +25,18 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        customer = true;
+                        IMenu customerMenu = new CustomerMenu();
+                        customerMenu.Start();
                         stay = false;
                         break;
                     case "1":
-                        manager = true;
+                        IMenu managerMenu = new ManagerMenu();
+                        managerMenu.Start();
+                        stay = false;
+                        break;
+                    case "q":
+                    case "Q":
+                        Console.WriteLine("Thank you please come again!");
                         stay = false;
                         break;
                     default:
@@ -39,14 +44,6 @@ namespace SUI
                         break;
                 }
             } while (stay);
-        }
-
-        public bool getCustomer(){
-            return customer;
-        }
-
-        public bool getManager(){
-            return manager;
         }
     }
 }

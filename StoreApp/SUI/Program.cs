@@ -32,17 +32,6 @@ namespace SUI
 
             IMenu startMenu = new StartMenu();
             startMenu.Start();
-
-            if (startMenu.getCustomer()){
-                IMenu customerMenu = new CustomerMenu();
-                customerMenu.Start();
-            }
-
-            if (startMenu.getManager()){
-                IMenu managerMenu = new ManagerMenu();
-                managerMenu.Start();
-            }
-
         }
     }
 }
