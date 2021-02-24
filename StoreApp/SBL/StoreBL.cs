@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Revature.Ulices_Esqueda_P0.StoreApp.SModels;
 using SDL;
-using SModels;
 
 
 namespace SBL

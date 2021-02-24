@@ -1,7 +1,6 @@
 ﻿using System;
 using SBL;
 using SDL;
-using SModels;
 
 namespace SUI
 {
