@@ -1,4 +1,6 @@
-namespace Revature.Ulices_Esqueda_P0.StoreApp.SModels
+using System;
+
+namespace SModels
 {
     public class Product
     {

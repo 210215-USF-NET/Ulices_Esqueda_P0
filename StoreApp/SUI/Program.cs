@@ -1,4 +1,7 @@
 ﻿using System;
+using SBL;
+using SDL;
+using SModels;
 
 namespace SUI
 {
@@ -30,7 +33,7 @@ namespace SUI
             At the end of the transaction you can go back to the main menu. 
             */
 
-            IMenu startMenu = new StartMenu();
+            IMenu startMenu = new StartMenu(new StoreBL(new StoreRepo()));
             startMenu.Start();
         }
     }

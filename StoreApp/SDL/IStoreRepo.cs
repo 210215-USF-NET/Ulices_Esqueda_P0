@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
+using SModels;
 
-
-namespace Revature.Ulices_Esqueda_P0.StoreApp.SDL
+namespace SDL
 {
-    public class IStoreRepo
+    public interface IStoreRepo
     {
         List<Products> getInventory();
         List<Orders> getOrders();

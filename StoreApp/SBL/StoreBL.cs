@@ -1,13 +1,19 @@
-namespace Revature.Ulices_Esqueda_P0.StoreApp.SBL
+using System;
+using System.Collections.Generic;
+using SDL;
+using SModels;
+
+
+namespace SBL
 {
     public class StoreBL : IStoreBL
     {
         private IStoreBL _repo;
-        public StoreBL(IStorerepo repo){
-            _repo = repo;
+        public StoreBL(IStoreRepo repo){
+            _repo = (IStoreBL)repo;
         }
 
-        public List<Products> getInventory(){
+        public List<Product> getInventory(){
             return _repo.getInventory();
         }
         public List<Orders> getOrders(){

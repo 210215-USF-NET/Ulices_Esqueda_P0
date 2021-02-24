@@ -3,11 +3,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SModels\SModels.csproj" />
     <ProjectReference Include="..\SDL\SDL.csproj" />
-    <ProjectReference Include="..\SBL\SBL.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 

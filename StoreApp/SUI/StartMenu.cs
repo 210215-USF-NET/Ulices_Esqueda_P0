@@ -1,9 +1,14 @@
 using System;
+using SBL;
 
 namespace SUI
 {
     public class StartMenu : IMenu
     {
+        private IStoreBL _storeBL;
+        public StartMenu(IStoreBL storeBL){
+            _storeBL = storeBL;
+        }
 
         //Handles the beginning and deternimes if a person is a customer or manager.
         public void Start(){

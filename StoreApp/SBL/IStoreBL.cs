@@ -1,10 +1,10 @@
 using System;
 
-namespace Revature.Ulices_Esqueda_P0.StoreApp.SBL
+namespace SBL
 {
-    public class IStoreBL
+    public interface IStoreBL
     {
-        List<Products> getInventory();
+        List<Product> getInventory();
         List<Orders> getOrders();
         void PlaceOrder(Orders newOrder);
     }
