@@ -5,16 +5,15 @@ namespace SUI
     //Handles when a Customer visits the StoreApp
     public class CustomerMenu : IMenu
     {
-        //This Start method is the beginning of the Menue options.
+        //This Start method is the beginning of the Menu options.
         public void Start(){
             Console.WriteLine("Are you a returning customer, a new customer, or a guest?");
             Console.WriteLine("[0] I am a returning customer.");
             Console.WriteLine("[1] I am a new customer.");
-            Console.WriteLine("[2] I am a guest.");
+            //Console.WriteLine("[2] I am a guest.");
             Console.WriteLine("[Q] Pess 'q' to exit.");
 
             bool stay = true;
-            CustomerMenu customerMenu = new CustomerMenu();
             do
             {
                 //Get user Input
@@ -24,17 +23,17 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        customerMenu.returningCustomer();
+                        returningCustomer();
                         stay = false;
                         break;
                     case "1":
-                        customerMenu.newCustomer();
+                        newCustomer();
                         stay = false;
                         break;
-                    case "2":
-                        customerMenu.guest();
-                        stay = false;
-                        break;
+                    // case "2":
+                    //     guest();
+                    //     stay = false;
+                    //     break;
                     case "q":
                     case "Q":
                         Console.WriteLine("Thank you please come again!");
@@ -96,8 +95,9 @@ namespace SUI
             
         }
         //This method is used to use the Store app without saving any information
-        public void guest(){
+        // public void guest(){
             
-        }
+        // }
+        
     }
 }
