@@ -17,11 +17,14 @@ namespace SUI
             //TODO: Some form of input Validation, but thats for later (Stretch Goal)
             string storeName = Console.ReadLine();
             bool stay = true;
-            int count = 0;
+            int returningValue = 0;
             do
             {
-                if (count > 0){
-                    Console.WriteLine($"Hello! Welcome back to { storeName }. What would you like to do?");
+                if (returningValue == 1){
+                    Console.WriteLine($"I see you're done ordering. What else would you like to do?");
+                }
+                else if (returningValue == 2){
+                    Console.WriteLine($"Do you see anything you like? What now?");
                 }
                 else{
                     Console.WriteLine($"Welcome to { storeName }. What would you like to do?");
@@ -39,10 +42,11 @@ namespace SUI
                 {
                     case "0":
                         getInventory();
+                        returningValue = 2;
                         break;
                     case "1":
                         placeOrder();
-                        count++;
+                        returningValue = 1;
                         break;
                     case "q":
                     case "Q":
