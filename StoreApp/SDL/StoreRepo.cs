@@ -1,11 +1,16 @@
 using System.Collections.Generic;
-using Revature.Ulices_Esqueda_P0.StoreApp.SModels;
+using SModels;
 
 namespace SDL
 {
     public class StoreRepo : IStoreRepo
     {
         public List<Product> getInventory()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Location> getLocations()
         {
             throw new System.NotImplementedException();
         }

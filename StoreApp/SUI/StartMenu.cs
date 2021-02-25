@@ -30,12 +30,12 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        IMenu customerMenu = new CustomerMenu();
+                        IMenu customerMenu = new CustomerMenu(_storeBL);
                         customerMenu.Start();
                         stay = false;
                         break;
                     case "1":
-                        IMenu managerMenu = new ManagerMenu();
+                        IMenu managerMenu = new ManagerMenu(_storeBL);
                         managerMenu.Start();
                         stay = false;
                         break;

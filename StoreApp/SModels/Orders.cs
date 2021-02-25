@@ -7,6 +7,6 @@ namespace SModels
     {
         public int OrderNum { get; set; }
 
-        public List<String> ListOfProducts { get; set; }
+        public List<Product> ListOfProducts { get; set; }
     }
 }

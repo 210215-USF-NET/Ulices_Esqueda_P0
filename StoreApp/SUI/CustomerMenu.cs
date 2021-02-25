@@ -1,10 +1,17 @@
 using System;
+using SBL;
+using SModels;
 
 namespace SUI
 {
     //Handles when a Customer visits the StoreApp
     public class CustomerMenu : IMenu
     {
+        private IStoreBL _storeBL;
+        public CustomerMenu(IStoreBL storeBL){
+            _storeBL = storeBL;
+        }
+
         //This Start method is the beginning of the Menu options.
         public void Start(){
             Console.WriteLine("Are you a returning customer, a new customer, or a guest?");
@@ -51,17 +58,16 @@ namespace SUI
             /*
                 Work on some implementation to make sure you can track the user.
             */
-            String username = "Name";
-            Console.WriteLine($"Hello {username} what would you like to do.");
-            Console.WriteLine("[0] Place an order.");
-            Console.WriteLine("[1] View order history.");
-            Console.WriteLine("[2] View location history.");
-            Console.WriteLine("[Q] Pess 'q' to exit.");
-
             bool stay = true;
-            CustomerMenu customerMenu = new CustomerMenu();
             do
             {
+                String username = "Name";
+                Console.WriteLine($"Hello {username} what would you like to do.");
+                Console.WriteLine("[0] Visit a shop.");
+                Console.WriteLine("[1] View order history.");
+                Console.WriteLine("[2] View location history.");
+                Console.WriteLine("[Q] Pess 'q' to exit.");
+
                 //Get user Input
                 Console.WriteLine("Enter a number: ");
                 string userInput = Console.ReadLine();
@@ -69,15 +75,14 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        //Place an order functionality.
+                        IMenu storeMenu = new StoreMenu(_storeBL);
+                        storeMenu.Start();
                         break;
                     case "1":
-                        //View order Functionality.
-                        stay = false;
+                        OrderHistory();
                         break;
                     case "2":
-                        //View Location History.
-                        stay = false;
+                        LocationHistory();
                         break;
                     case "q":
                     case "Q":
@@ -99,5 +104,12 @@ namespace SUI
             
         // }
         
+        public void OrderHistory(){
+
+        }
+
+        public void LocationHistory(){
+
+        }
     }
 }

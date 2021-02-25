@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Revature.Ulices_Esqueda_P0.StoreApp.SModels;
+using SModels;
 using SDL;
 
 
@@ -8,9 +8,9 @@ namespace SBL
 {
     public class StoreBL : IStoreBL
     {
-        private IStoreBL _repo;
+        private IStoreRepo _repo;
         public StoreBL(IStoreRepo repo){
-            _repo = (IStoreBL)repo;
+            _repo = repo;
         }
 
         public List<Product> getInventory(){
@@ -18,6 +18,10 @@ namespace SBL
         }
         public List<Orders> getOrders(){
             return _repo.getOrders();
+        }
+
+        public List<Location> getLocations(){
+            return _repo.getLocations();
         }
 
         public void PlaceOrder(Orders newOrder){

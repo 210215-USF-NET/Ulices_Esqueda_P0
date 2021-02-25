@@ -7,5 +7,7 @@ namespace SModels
         public String ProductName { get; set; }
 
         public Double Price { get; set; }
+
+        public String Description { get; set; }
     }
 }

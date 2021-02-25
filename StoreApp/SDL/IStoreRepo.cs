@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Revature.Ulices_Esqueda_P0.StoreApp.SModels;
+using SModels;
 
 namespace SDL
 {
@@ -8,6 +8,7 @@ namespace SDL
     {
         List<Product> getInventory();
         List<Orders> getOrders();
+        List<Location> getLocations();
         Orders PlaceOrder(Orders newOrder);
     }
 }
