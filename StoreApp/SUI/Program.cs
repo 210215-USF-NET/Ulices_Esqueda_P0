@@ -1,6 +1,10 @@
 ﻿using System;
 using SBL;
 using SDL;
+using SDL.Entities;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace SUI
 {
@@ -32,7 +36,21 @@ namespace SUI
             At the end of the transaction you can go back to the main menu. 
             */
 
-            IMenu startMenu = new StartMenu(new StoreBL(new StoreRepo()));
+            //Get the config file
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+            //Setting up DB connection
+            string connectionString = configuration.GetConnectionString("StoreDB");
+            DbContextOptions<p0dbContext> options = new DbContextOptionsBuilder<p0dbContext>()
+            .UseSqlServer(connectionString)
+            .Options;
+
+            using var context = new p0dbContext(options);
+
+            IMenu startMenu = new StartMenu(new StoreBL(new StoreRepoDB(context, new StoreMapper())));
             startMenu.Start();
         }
     }
