@@ -6,9 +6,9 @@ namespace SDL
 {
     public interface IStoreRepo
     {
-        List<Product> getInventory();
-        List<Orders> getOrders();
-        List<Location> getLocations();
+        List<Product> getInventory(Store store);
+        List<Orders> getOrders(Customers customer);
+        List<LocationVisited> getLocations(Customers customer);
         Orders PlaceOrder(Orders newOrder);
     }
 }

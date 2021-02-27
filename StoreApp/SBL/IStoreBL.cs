@@ -8,7 +8,7 @@ namespace SBL
     {
         List<Product> getInventory();
         List<Orders> getOrders();
-        List<Location> getLocations();
+        List<LocationVisited> getLocations();
         void PlaceOrder(Orders newOrder);
     }
 }

@@ -13,6 +13,36 @@ namespace SDL
         Entity.Customer ParseCustomer(Model.Customers customer);
 
         Model.LocationVisited ParseLocation(Entity.LocationVisited location);
+
         Entity.LocationVisited ParseLocation(Model.LocationVisited location);
+
+        Model.Manager ParseManager(Entity.Manager manager);
+
+        Entity.Manager ParseManager(Model.Manager manager);
+
+        Model.OrderItem ParseOrderItem(Entity.OrderItem orderItem);
+
+        Entity.OrderItem ParseOrderItem(Model.OrderItem orderItem);
+
+        Model.Orders ParseOrder(Entity.Order order);
+
+        Entity.Order ParseOrder(Model.Orders order);
+
+        Model.Product ParseProduct(Entity.Product product);
+
+        Entity.Product ParseProduct(Model.Product product);
+
+        Model.Store ParseStore(Entity.Store store);
+
+        Entity.Store ParseStore(Model.Store store);
+
+        Model.StoreInventory ParseStoreInventory(Entity.StoreInventory storeInventory);
+
+        Entity.StoreInventory ParseStoreInventory(Model.StoreInventory storeInventory);
+
+        Model.TrackOrder ParseTrackOrder(Entity.TrackOrder trackOrder);
+
+        Entity.TrackOrder ParseTrackOrder(Model.TrackOrder trackOrder);
+
     }
 }

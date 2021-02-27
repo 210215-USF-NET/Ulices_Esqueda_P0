@@ -20,7 +20,7 @@ namespace SBL
             return _repo.getOrders();
         }
 
-        public List<Location> getLocations(){
+        public List<LocationVisited> getLocations(){
             return _repo.getLocations();
         }
 
