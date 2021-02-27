@@ -4,10 +4,13 @@ namespace SModels
 {
     public class Customers
     {
-        public String CustomerFirstName { get; set; }
+        public int CustomerID { get; set; }
+        public string CustomerFirstName { get; set; }
 
-        public String CustomerLastName { get; set; }
+        public string CustomerLastName { get; set; }
 
-        public String Email { get; set; }
+        public string Email { get; set; }
+
+        public int CustomerPhoneNumber { get; set; }
     }
 }

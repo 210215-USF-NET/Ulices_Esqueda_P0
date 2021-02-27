@@ -1,3 +1,6 @@
+using Model = SModels;
+using Entity = SDL.Entities;
+
 namespace SDL
 {
     /// <summary>
@@ -5,6 +8,11 @@ namespace SDL
     /// </summary>
     public interface IMapper
     {
-        
+        Model.Customers ParseCustomer(Entity.Customer customer);
+
+        Entity.Customer ParseCustomer(Model.Customers customer);
+
+        Model.LocationVisited ParseLocation(Entity.LocationVisited location);
+        Entity.LocationVisited ParseLocation(Model.LocationVisited location);
     }
 }

@@ -5,8 +5,8 @@ namespace SModels
 {
     public class Orders
     {
-        public int OrderNum { get; set; }
-
-        public List<Product> ListOfProducts { get; set; }
+        public int OrderID { get; set; }
+        public string OrderDate { get; set; }
+        public int OrderTotal { get; set; }
     }
 }
