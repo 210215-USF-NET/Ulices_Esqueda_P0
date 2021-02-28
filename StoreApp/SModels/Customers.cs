@@ -11,6 +11,6 @@ namespace SModels
 
         public string Email { get; set; }
 
-        public int CustomerPhoneNumber { get; set; }
+        public string CustomerPhoneNumber { get; set; }
     }
 }

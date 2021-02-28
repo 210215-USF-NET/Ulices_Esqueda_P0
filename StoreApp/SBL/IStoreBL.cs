@@ -6,9 +6,9 @@ namespace SBL
 {
     public interface IStoreBL
     {
-        List<Product> getInventory();
-        List<Orders> getOrders();
-        List<LocationVisited> getLocations();
+        List<Product> getInventory(Store store);
+        List<Orders> getOrders(Customers customer);
+        List<LocationVisited> getLocations(Customers customer);
         void PlaceOrder(Orders newOrder);
     }
 }

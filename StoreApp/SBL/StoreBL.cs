@@ -13,15 +13,15 @@ namespace SBL
             _repo = repo;
         }
 
-        public List<Product> getInventory(){
-            return _repo.getInventory();
+        public List<Product> getInventory(Store store){
+            return _repo.getInventory(store);
         }
-        public List<Orders> getOrders(){
-            return _repo.getOrders();
+        public List<Orders> getOrders(Customers customer){
+            return _repo.getOrders(customer);
         }
 
-        public List<LocationVisited> getLocations(){
-            return _repo.getLocations();
+        public List<LocationVisited> getLocations(Customers customer){
+            return _repo.getLocations(customer);
         }
 
         public void PlaceOrder(Orders newOrder){
