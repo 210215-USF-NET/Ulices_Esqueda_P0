@@ -40,8 +40,8 @@ namespace SDL
         {
             return new Entities.LocationVisited{
                 LocationVisitedId = location.LocationVisitedID,
-                CustomerId = ParseCustomer(location.Customer).CustomerId,
-                StoreId = ParseStore(location.Store).StoreId
+                CustomerId = location.Customer.CustomerID,
+                StoreId = location.Store.StoreID
             };
         }
 
