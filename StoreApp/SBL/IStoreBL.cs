@@ -7,9 +7,10 @@ namespace SBL
     public interface IStoreBL
     {
         List<Product> getInventory(Store store);
-        List<Orders> getOrders(Customers customer);
-        List<LocationVisited> getLocations(Customers customer);
+        void getOrderHistory(Customers customer);
+        void getLocationHistory(Customers customer);
         void PlaceOrder(Orders newOrder);
         Customers getCustomerByEmail(String email);
+        Customers addCustomer(Customers newCustomer);
     }
 }

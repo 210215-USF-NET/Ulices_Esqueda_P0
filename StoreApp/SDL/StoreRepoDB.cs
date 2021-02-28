@@ -4,6 +4,7 @@ using Entity = SDL.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SModels;
+using System;
 
 namespace SDL
 {
@@ -20,14 +21,44 @@ namespace SDL
             throw new System.NotImplementedException();
         }
 
-        public List<Model.LocationVisited> getLocations(Model.Customers customer)
+        public void getLocationHistory(Model.Customers customer)
         {
-            throw new System.NotImplementedException();
+            var queryCustomerLocationHistory = (
+                from loc in _context.LocationVisiteds
+                join store in _context.Stores on loc.StoreId equals store.StoreId
+                where loc.CustomerId == customer.CustomerID
+                select new {store.StoreLocation}
+            );
+            if(!queryCustomerLocationHistory.Any()){
+                Console.WriteLine("Seems like you haven't visited any stores.");
+                Console.WriteLine("Please visit a shop and see what they have to offer!");
+            }
+            else {
+                foreach (var item in queryCustomerLocationHistory)
+                {
+                    Console.WriteLine($"You've been to: {item.StoreLocation}");
+                }
+            }
         }
 
-        public List<Model.Orders> getOrders(Model.Customers customer)
+        public void getOrderHistory(Model.Customers customer)
         {
-            throw new System.NotImplementedException();
+            var queryCustomerOrderHistory = (
+                from track in _context.TrackOrders
+                join order in _context.Orders on track.OrderId equals order.OrderId
+                where track.CustomerId == customer.CustomerID
+                select new {track.OrderId, order.OrderDate, order.OrderTotal}
+            );
+            if (!queryCustomerOrderHistory.Any()){
+                Console.WriteLine("Seems like you haven't made an order");
+                Console.WriteLine("Please visit a shop to make your first order.");
+            }
+            else{
+                foreach (var item in queryCustomerOrderHistory)
+                {
+                    Console.WriteLine($"Order {item.OrderId}, OrderDate: {item.OrderDate}, Order Total: {item.OrderTotal}");
+                }
+            }
         }
 
         public Model.Orders PlaceOrder(Model.Orders newOrder)
@@ -36,16 +67,20 @@ namespace SDL
         }
 
         public Customers getCustomerByEmail(string email){
-            var customQuery =
-                _context.Customers.AsSingleQuery()
-
-            Customers cperson = new Customers();
-            //cperson.Email = email;
-            Entity.Customer foundcustomer = (Entity.Customer) customerQuery;
-            //Entity.Customer foundcustomer = _context.Customers.Find(cperson.Email);
-            cperson = _mapper.ParseCustomer(foundcustomer);
-            return cperson;
+            var queryCustomersByEmail = (from cust in _context.Customers
+                                        where cust.CustomerEmail == email
+                                        select cust).ToList().FirstOrDefault();
+            if (queryCustomersByEmail == null){
+                return null;
+            }
+            return _mapper.ParseCustomer(queryCustomersByEmail);
         }
 
+        public Customers addCustomer(Customers newCustomer)
+        {
+            _context.Customers.Add(_mapper.ParseCustomer(newCustomer));
+            _context.SaveChanges();
+            return newCustomer;
+        }
     }
 }

@@ -16,12 +16,12 @@ namespace SBL
         public List<Product> getInventory(Store store){
             return _repo.getInventory(store);
         }
-        public List<Orders> getOrders(Customers customer){
-            return _repo.getOrders(customer);
+        public void getOrderHistory(Customers customer){
+            _repo.getOrderHistory(customer);
         }
 
-        public List<LocationVisited> getLocations(Customers customer){
-            return _repo.getLocations(customer);
+        public void getLocationHistory(Customers customer){
+            _repo.getLocationHistory(customer);
         }
 
         public void PlaceOrder(Orders newOrder){
@@ -32,5 +32,9 @@ namespace SBL
             return _repo.getCustomerByEmail(email);
         }
 
+        public Customers addCustomer(Customers newCustomer)
+        {
+            return _repo.addCustomer(newCustomer);
+        }
     }
 }

@@ -12,5 +12,9 @@ namespace SModels
         public string Email { get; set; }
 
         public string CustomerPhoneNumber { get; set; }
+
+        public string getCustomerFullName(){
+            return CustomerFirstName + " " + CustomerLastName;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace SUI
         public void Start(){
             Console.WriteLine("Are you a returning customer, a new customer, or a guest?");
             Console.WriteLine("[0] I am a returning customer.");
-            Console.WriteLine("[1] I am a new customer.");
+            Console.WriteLine("[1] I am a new customer, and would like to sign up.");
             //Console.WriteLine("[2] I am a guest.");
             Console.WriteLine("[Q] Pess 'q' to exit.");
 
@@ -30,7 +30,8 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        returningCustomer();
+                        Customers customer = verifyCustomer();
+                        returningCustomer(customer);
                         stay = false;
                         break;
                     case "1":
@@ -54,14 +55,11 @@ namespace SUI
         }
 
         //This is the method we use when a returning customer comes back to your store.
-        public void returningCustomer(){
-            Customers customer = verifyCustomer();
-            
+        public void returningCustomer(Customers customer){
             bool stay = true;
             do
             {
-                String username = customer.CustomerFirstName + " " + customer.CustomerLastName;
-                Console.WriteLine($"Hello {username} what would you like to do.");
+                Console.WriteLine($"Hello {customer.getCustomerFullName()} what would you like to do.");
                 Console.WriteLine("[0] Visit a shop.");
                 Console.WriteLine("[1] View order history.");
                 Console.WriteLine("[2] View location history.");
@@ -78,7 +76,7 @@ namespace SUI
                         storeMenu.Start();
                         break;
                     case "1":
-                        OrderHistory();
+                        OrderHistory(customer);
                         break;
                     case "2":
                         LocationHistory(customer);
@@ -104,12 +102,12 @@ namespace SUI
                 Console.WriteLine("Please enter your email: ");
                 customer = _storeBL.getCustomerByEmail(Console.ReadLine());
                 if (customer == null){
-                    Console.WriteLine("That email does not exist. Try again.");
+                    Console.WriteLine("That email does not exist.");
                     stay = true;
                     count++;
                 }
                 if (count > 3){
-                    Console.WriteLine("You entered the wrong email too many times. Sorry");
+                    Console.WriteLine("You entered the wrong email too many times.");
                     Exit();
                 }
             } while(stay);
@@ -118,19 +116,40 @@ namespace SUI
         }
         //This method is used to create a new user in your database.
         public void newCustomer(){
-            
+            Console.WriteLine("Hello and welcome to (EnterShopName). Thank you for signing up.");
+            Console.WriteLine("We are just going to need some basic information to get started.");
+            Customers customer =_storeBL.addCustomer(GetCustomerDetails());
+            returningCustomer(customer);
+        }
+
+        public Customers GetCustomerDetails(){
+            Customers newCustomer = new Customers();
+
+            Console.WriteLine("Enter your first name: ");
+            newCustomer.CustomerFirstName = Console.ReadLine();
+
+            Console.WriteLine("Enter your last name: ");
+            newCustomer.CustomerLastName = Console.ReadLine();
+
+            Console.WriteLine("Enter your email: ");
+            newCustomer.Email = Console.ReadLine();
+
+            Console.WriteLine("Enter your phone number: ");
+            newCustomer.CustomerPhoneNumber = Console.ReadLine();
+
+            return newCustomer;
         }
         //This method is used to use the Store app without saving any information
         // public void guest(){
             
         // }
         
-        public void OrderHistory(){
-
+        public void OrderHistory(Customers customer){
+            _storeBL.getOrderHistory(customer);
         }
 
         public void LocationHistory(Customers customer){
-            _storeBL.getLocations(customer);
+            _storeBL.getLocationHistory(customer);
         }
 
         public void Exit(){
