@@ -34,5 +34,18 @@ namespace SDL
         {
             throw new System.NotImplementedException();
         }
+
+        public Customers getCustomerByEmail(string email){
+            var customQuery =
+                _context.Customers.AsSingleQuery()
+
+            Customers cperson = new Customers();
+            //cperson.Email = email;
+            Entity.Customer foundcustomer = (Entity.Customer) customerQuery;
+            //Entity.Customer foundcustomer = _context.Customers.Find(cperson.Email);
+            cperson = _mapper.ParseCustomer(foundcustomer);
+            return cperson;
+        }
+
     }
 }

@@ -10,5 +10,6 @@ namespace SDL
         List<Orders> getOrders(Customers customer);
         List<LocationVisited> getLocations(Customers customer);
         Orders PlaceOrder(Orders newOrder);
+        Customers getCustomerByEmail(String email);
     }
 }

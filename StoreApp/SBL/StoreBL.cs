@@ -28,5 +28,9 @@ namespace SBL
             _repo.PlaceOrder(newOrder);
         }
 
+        public Customers getCustomerByEmail(String email){
+            return _repo.getCustomerByEmail(email);
+        }
+
     }
 }

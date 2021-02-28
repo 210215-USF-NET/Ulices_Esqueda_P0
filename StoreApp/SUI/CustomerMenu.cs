@@ -55,13 +55,12 @@ namespace SUI
 
         //This is the method we use when a returning customer comes back to your store.
         public void returningCustomer(){
-            /*
-                Work on some implementation to make sure you can track the user.
-            */
+            Customers customer = verifyCustomer();
+            
             bool stay = true;
             do
             {
-                String username = "Name";
+                String username = customer.CustomerFirstName + " " + customer.CustomerLastName;
                 Console.WriteLine($"Hello {username} what would you like to do.");
                 Console.WriteLine("[0] Visit a shop.");
                 Console.WriteLine("[1] View order history.");
@@ -82,7 +81,7 @@ namespace SUI
                         OrderHistory();
                         break;
                     case "2":
-                        LocationHistory();
+                        LocationHistory(customer);
                         break;
                     case "q":
                     case "Q":
@@ -94,6 +93,28 @@ namespace SUI
                         break;
                 }
             } while (stay);
+        }
+
+        public Customers verifyCustomer(){
+            Customers customer = new Customers();
+            bool stay = false;
+            int count = 0;
+            do
+            {
+                Console.WriteLine("Please enter your email: ");
+                customer = _storeBL.getCustomerByEmail(Console.ReadLine());
+                if (customer == null){
+                    Console.WriteLine("That email does not exist. Try again.");
+                    stay = true;
+                    count++;
+                }
+                if (count > 3){
+                    Console.WriteLine("You entered the wrong email too many times. Sorry");
+                    Exit();
+                }
+            } while(stay);
+            
+            return customer;
         }
         //This method is used to create a new user in your database.
         public void newCustomer(){
@@ -108,8 +129,12 @@ namespace SUI
 
         }
 
-        public void LocationHistory(){
+        public void LocationHistory(Customers customer){
+            _storeBL.getLocations(customer);
+        }
 
+        public void Exit(){
+            System.Environment.Exit(0);
         }
     }
 }

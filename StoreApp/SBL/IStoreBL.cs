@@ -10,5 +10,6 @@ namespace SBL
         List<Orders> getOrders(Customers customer);
         List<LocationVisited> getLocations(Customers customer);
         void PlaceOrder(Orders newOrder);
+        Customers getCustomerByEmail(String email);
     }
 }
