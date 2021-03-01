@@ -15,10 +15,12 @@ namespace SBL
         void addNewOrder();
         void addOrderItem(OrderItem newOrderItem);
         void addTrackOrderItem(TrackOrder newTrackOrder);
+        void getStoreInventory(Store store);
         Store getStoreByName(String storeName);
         Customers getCustomerByEmail(String email);
         Product getProductByName(String productName);
         Orders getMostRecentOrder();
         OrderItem getMostRecentOrderItem();
+        Manager getManagerByFirstName(String managerName);
     }
 }

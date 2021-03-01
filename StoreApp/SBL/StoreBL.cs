@@ -75,5 +75,15 @@ namespace SBL
         {
             return _repo.getMostRecentOrderItem();
         }
+
+        public void getStoreInventory(Store store)
+        {
+            _repo.getStoreInventory(store);
+        }
+
+        public Manager getManagerByFirstName(String managerName)
+        {
+            return _repo.getManagerByFirstName(managerName);
+        }
     }
 }

@@ -20,7 +20,10 @@ namespace SUI
             Start();
         }
         public void Start(){
+            Console.WriteLine("====================================================================================================");
+            Console.WriteLine("");
             Console.WriteLine("All store locations: ");
+            Console.WriteLine("");
             _storeBL.getAllStoreNames();
             //TODO: Some form of input Validation, but thats for later (Stretch Goal)
             verifyStore();
@@ -35,6 +38,7 @@ namespace SUI
             int returningValue = 0;
             do
             {
+                Console.WriteLine("");
                 if (returningValue == 1){
                     Console.WriteLine($"I see you're done ordering. What else would you like to do?");
                 }
@@ -50,6 +54,7 @@ namespace SUI
 
             
                 //Get user Input
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                 Console.WriteLine("Enter a number: ");
                 string userInput = Console.ReadLine();
 
@@ -158,18 +163,26 @@ namespace SUI
             return trackOrderItem ;
         }
         public void getInventory(){
-
-            //TODO: Get list of products from database from this specific location.
+            Console.WriteLine("====================================================================================================");
+            Console.WriteLine("");
+            _storeBL.getStoreInventory(_store);
+            Console.WriteLine("");
+            Console.WriteLine("====================================================================================================");
         }
         
         public void verifyStore(){
             bool stay = false;
             int count = 0;
+            Console.WriteLine("");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("");
             do
             {
                 Console.WriteLine("What store location would you like to visit?");
                 _store = _storeBL.getStoreByName(Console.ReadLine());
+                Console.WriteLine("");
                 if (_store == null){
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("That store does not exist. Please enter from the list given.");
                     stay = true;
                     count++;
@@ -178,10 +191,12 @@ namespace SUI
                     stay = false;
                 }
                 if (count > 3){
+                    Console.WriteLine("====================================================================================================");
                     Console.WriteLine("Here is the list of stores again: ");
                     _storeBL.getAllStoreNames();
                 }
             } while(stay);
+            Console.WriteLine("====================================================================================================");
         } 
     }
 }

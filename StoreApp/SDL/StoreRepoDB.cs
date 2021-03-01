@@ -48,7 +48,7 @@ namespace SDL
             );
             foreach (var item in queryAllStoreLocations)
             {
-                Console.WriteLine(item.StoreName);
+                Console.WriteLine($"- {item.StoreName}");
             }
         }
 
@@ -161,6 +161,29 @@ namespace SDL
                 return null;
             }
             return _mapper.ParseOrderItem(queryMostRecentOrderItem);
+        }
+        public void getStoreInventory(Store store){
+            var queryInventory = (
+                from inv in _context.StoreInventories
+                join prod in _context.Products on inv.ProductId equals prod.ProductId
+                select new {prod.ProductName, prod.ProductPrice, inv.InventoryQuantity}
+            );
+            if (!queryInventory.Any()){
+                Console.WriteLine("Sorry about that but it seems like we ran out of products.");
+                Console.WriteLine("Please come again later.");
+            }
+            else{
+                foreach (var item in queryInventory)
+                {
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                    Console.WriteLine($"Product: {item.ProductName}, Price: {item.ProductPrice}, Quantity: {item.InventoryQuantity}");
+                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+
+                }
+            }
+        }
+        public Manager getManagerByFirstName(String name){
+            return null;
         }
     }
 }
