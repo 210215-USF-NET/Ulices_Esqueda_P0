@@ -183,7 +183,14 @@ namespace SDL
             }
         }
         public Manager getManagerByFirstName(String name){
-            return null;
+            var queryManagerByFirstName = (
+                from manager in _context.Managers
+                where manager.ManagerFirstName == name
+                select manager).ToList().FirstOrDefault();
+            if (queryManagerByFirstName == null){
+                return null;
+            }
+            return _mapper.ParseManager(queryManagerByFirstName);
         }
     }
 }
