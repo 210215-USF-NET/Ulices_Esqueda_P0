@@ -11,9 +11,12 @@ namespace SBL
         void getLocationHistory(Customers customer);
         void getAllStoreNames();
         Store getStoreByName(String storeName);
-        void PlaceOrder(Orders newOrder);
         Customers getCustomerByEmail(String email);
+        Product getProductByName(String productName);
         Customers addCustomer(Customers newCustomer);
         void addVisistedStore(LocationVisited store);
+        Orders addNewOrder();
+        OrderItem addOrderItem(OrderItem newOrderItem);
+        void addTrackOrderItem(TrackOrder newTrackOrder);
     }
 }

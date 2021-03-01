@@ -86,7 +86,7 @@ namespace SDL
         {
             return new SModels.OrderItem{
                 OrderItemID = orderItem.OrderItemId,
-                ProductID = (int) orderItem.ProductId,
+                Product = ParseOrderItem(orderItem).Product,
                 ProductQuantity = orderItem.ProductQuantity
             };
         }
@@ -95,7 +95,7 @@ namespace SDL
         {
             return new Entities.OrderItem{
                 OrderItemId = orderItem.OrderItemID,
-                ProductId = orderItem.ProductID,
+                ProductId = orderItem.Product.ProductID,
                 ProductQuantity = orderItem.ProductQuantity
             };
         }

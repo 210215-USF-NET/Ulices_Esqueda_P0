@@ -6,6 +6,7 @@ namespace SUI
 {
     public class StoreMenu : IMenu
     {
+        private Product _product;
         private Store _store;
         private Customers _customer;
         private IStoreBL _storeBL;
@@ -75,15 +76,20 @@ namespace SUI
         }
 
         public void placeOrder(){
-
+            //Make a new order with total equal to zero and date the time it was executed.
+            Orders order = _storeBL.addNewOrder();
             bool stillOrdering = true;
             int count = 1;
             do{
-                Console.WriteLine("Enter the item you would like to add: ");
-                string itemName = Console.ReadLine();
-                //TODO: Input Validation
-                Console.WriteLine($"Enter the quantity you would like to add of { itemName }: ");
-                int itemQuantity = int.Parse(Console.ReadLine());
+                //Make new order item and add it to the database.
+                OrderItem newOrderItem = _storeBL.addOrderItem(getOrderDetails());
+
+                //Add order to track order database table
+                _storeBL.addTrackOrderItem(setTrackOrderDetails(order, newOrderItem));
+
+                //When you have product quantity and productID Add to orderItem list.
+                //Create new track order object and add customerID, orderID, orderItemID, and StoreID
+                //Then add that to the database. 
 
                 //TODO: Add the structures needed to add this functionality.
                 // Orders newOrder = new Orders();
@@ -112,8 +118,43 @@ namespace SUI
                 }
                 count++;
             } while(stillOrdering);
+
+            //Find out the order total and update the order total value.
         }
 
+        public OrderItem getOrderDetails(){
+            OrderItem newOrderItem = new OrderItem();
+
+            bool productTruth = true;
+            do {
+                Console.WriteLine("Enter the item you would like to add: ");
+                _product = _storeBL.getProductByName(Console.ReadLine());
+                if (_product == null){
+                    Console.WriteLine("This item is not available in this store.");
+                    Console.WriteLine("Maybe try another store or check your spelling.");
+                    productTruth = false;
+                }
+                else{
+                    productTruth = true;
+                }
+            } while(!productTruth);
+            newOrderItem.Product = _product;
+                
+             //TODO: Input Validation
+            Console.WriteLine($"Enter the quantity you would like to add of { _product.ProductName }: ");
+            newOrderItem.ProductQuantity = int.Parse(Console.ReadLine());
+
+            return newOrderItem;
+        }
+
+        public TrackOrder setTrackOrderDetails(Orders order, OrderItem orderItem){
+            TrackOrder trackOrderItem  = new TrackOrder();
+            trackOrderItem.Customer = _customer;
+            trackOrderItem.Order = order;
+            trackOrderItem.OrderItem = orderItem;
+            trackOrderItem.Store = _store;
+            return trackOrderItem ;
+        }
         public void getInventory(){
 
             //TODO: Get list of products from database from this specific location.

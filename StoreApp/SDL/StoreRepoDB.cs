@@ -72,11 +72,6 @@ namespace SDL
             }
         }
 
-        public Model.Orders PlaceOrder(Model.Orders newOrder)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public Customers getCustomerByEmail(string email){
             var queryCustomersByEmail = (from cust in _context.Customers
                                         where cust.CustomerEmail == email
@@ -109,6 +104,41 @@ namespace SDL
         public void addVisistedStore(LocationVisited location)
         {
             _context.LocationVisiteds.Add(_mapper.ParseLocation(location));
+            _context.SaveChanges();
+        }
+
+        public Product getProductByName(string productName)
+        {
+            var queryProductByName = (
+                from product in _context.Products
+                where product.ProductName == productName
+                select product).ToList().FirstOrDefault();
+            if (queryProductByName == null){
+                return null;
+            }
+            return _mapper.ParseProduct(queryProductByName);
+        }
+
+        public Orders getNewOrder()
+        {
+            Orders order = new Orders();
+            order.OrderDate = DateTime.Now;
+            order.OrderTotal = 0;
+            _context.Orders.Add(_mapper.ParseOrder(order));
+            _context.SaveChanges();
+            return order;
+        }
+
+        public OrderItem addOrderItem(OrderItem newOrderItem)
+        {
+            _context.OrderItems.Add(_mapper.ParseOrderItem(newOrderItem));
+            _context.SaveChanges();
+            return newOrderItem;
+        }
+
+        public void addTrackOrderItem(TrackOrder newTrackOrder)
+        {
+            _context.TrackOrders.Add(_mapper.ParseTrackOrder(newTrackOrder));
             _context.SaveChanges();
         }
     }

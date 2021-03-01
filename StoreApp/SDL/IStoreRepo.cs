@@ -12,8 +12,12 @@ namespace SDL
         void getAllStoreNames();
         void addVisistedStore(LocationVisited store);
         Store getStoreByName(String storeName);
-        Orders PlaceOrder(Orders newOrder);
+        Product getProductByName(String productName);
         Customers getCustomerByEmail(String email);
         Customers addCustomer(Customers newCustomer);
+        Orders getNewOrder();
+        OrderItem addOrderItem(OrderItem newOrderItem);
+
+        void addTrackOrderItem(TrackOrder newTrackOrder);
     }
 }

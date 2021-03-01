@@ -32,10 +32,6 @@ namespace SBL
             return _repo.getStoreByName(storeName);
         }
 
-        public void PlaceOrder(Orders newOrder){
-            _repo.PlaceOrder(newOrder);
-        }
-
         public Customers getCustomerByEmail(String email){
             return _repo.getCustomerByEmail(email);
         }
@@ -48,6 +44,26 @@ namespace SBL
         public void addVisistedStore(LocationVisited store)
         {
             _repo.addVisistedStore(store);
+        }
+
+        public Product getProductByName(string productName)
+        {
+            return _repo.getProductByName(productName);
+        }
+
+        public Orders addNewOrder()
+        {
+            return _repo.getNewOrder();
+        }
+
+        public OrderItem addOrderItem(OrderItem newOrderItem)
+        {
+            return _repo.addOrderItem(newOrderItem);
+        }
+
+        public void addTrackOrderItem(TrackOrder newTrackOrder)
+        {
+            _repo.addTrackOrderItem(newTrackOrder);
         }
     }
 }
