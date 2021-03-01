@@ -13,9 +13,10 @@ namespace SDL.Entities
         }
 
         public int OrderItemId { get; set; }
-        public string ProductName { get; set; }
+        public int? ProductId { get; set; }
         public int ProductQuantity { get; set; }
 
+        public virtual Product Product { get; set; }
         public virtual ICollection<TrackOrder> TrackOrders { get; set; }
     }
 }

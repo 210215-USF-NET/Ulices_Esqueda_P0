@@ -9,6 +9,7 @@ namespace SDL.Entities
     {
         public Product()
         {
+            OrderItems = new HashSet<OrderItem>();
             StoreInventories = new HashSet<StoreInventory>();
         }
 
@@ -16,6 +17,7 @@ namespace SDL.Entities
         public string ProductName { get; set; }
         public int ProductPrice { get; set; }
 
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<StoreInventory> StoreInventories { get; set; }
     }
 }
