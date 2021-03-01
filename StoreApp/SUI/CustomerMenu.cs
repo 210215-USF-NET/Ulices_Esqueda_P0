@@ -116,7 +116,7 @@ namespace SUI
         public void newCustomer(){
             Console.WriteLine("Hello and welcome to (EnterShopName). Thank you for signing up.");
             Console.WriteLine("We are just going to need some basic information to get started.");
-            _customer =_storeBL.addCustomer(GetCustomerDetails());
+            _storeBL.addCustomer(GetCustomerDetails());
             returningCustomer();
         }
 

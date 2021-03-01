@@ -14,10 +14,11 @@ namespace SDL
         Store getStoreByName(String storeName);
         Product getProductByName(String productName);
         Customers getCustomerByEmail(String email);
-        Customers addCustomer(Customers newCustomer);
-        Orders getNewOrder();
-        OrderItem addOrderItem(OrderItem newOrderItem);
-
+        void addCustomer(Customers newCustomer);
+        void addNewOrder();
+        void addOrderItem(OrderItem newOrderItem);
         void addTrackOrderItem(TrackOrder newTrackOrder);
+        Orders getMostRecentOrder();
+        OrderItem getMostRecentOrderItem();
     }
 }

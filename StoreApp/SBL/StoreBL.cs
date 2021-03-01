@@ -36,9 +36,9 @@ namespace SBL
             return _repo.getCustomerByEmail(email);
         }
 
-        public Customers addCustomer(Customers newCustomer)
+        public void addCustomer(Customers newCustomer)
         {
-            return _repo.addCustomer(newCustomer);
+            _repo.addCustomer(newCustomer);
         }
 
         public void addVisistedStore(LocationVisited store)
@@ -51,19 +51,29 @@ namespace SBL
             return _repo.getProductByName(productName);
         }
 
-        public Orders addNewOrder()
+        public void addNewOrder()
         {
-            return _repo.getNewOrder();
+            _repo.addNewOrder();
         }
 
-        public OrderItem addOrderItem(OrderItem newOrderItem)
+        public void addOrderItem(OrderItem newOrderItem)
         {
-            return _repo.addOrderItem(newOrderItem);
+            _repo.addOrderItem(newOrderItem);
         }
 
         public void addTrackOrderItem(TrackOrder newTrackOrder)
         {
             _repo.addTrackOrderItem(newTrackOrder);
+        }
+
+        public Orders getMostRecentOrder()
+        {
+            return _repo.getMostRecentOrder();
+        }
+
+        public OrderItem getMostRecentOrderItem()
+        {
+            return _repo.getMostRecentOrderItem();
         }
     }
 }

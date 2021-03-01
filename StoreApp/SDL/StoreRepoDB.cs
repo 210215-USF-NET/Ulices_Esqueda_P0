@@ -28,7 +28,7 @@ namespace SDL
                 join store in _context.Stores on loc.StoreId equals store.StoreId
                 where loc.CustomerId == customer.CustomerID
                 select new {store.StoreLocation}
-            );
+            ).Distinct();
             if(!queryCustomerLocationHistory.Any()){
                 Console.WriteLine("Seems like you haven't visited any stores.");
                 Console.WriteLine("Please visit a shop and see what they have to offer!");
@@ -59,7 +59,7 @@ namespace SDL
                 join order in _context.Orders on track.OrderId equals order.OrderId
                 where track.CustomerId == customer.CustomerID
                 select new {track.OrderId, order.OrderDate, order.OrderTotal}
-            );
+            ).Distinct();
             if (!queryCustomerOrderHistory.Any()){
                 Console.WriteLine("Seems like you haven't made an order");
                 Console.WriteLine("Please visit a shop to make your first order.");
@@ -82,11 +82,10 @@ namespace SDL
             return _mapper.ParseCustomer(queryCustomersByEmail);
         }
 
-        public Customers addCustomer(Customers newCustomer)
+        public void addCustomer(Customers newCustomer)
         {
             _context.Customers.Add(_mapper.ParseCustomer(newCustomer));
             _context.SaveChanges();
-            return newCustomer;
         }
 
         public Store getStoreByName(string storeName)
@@ -119,27 +118,49 @@ namespace SDL
             return _mapper.ParseProduct(queryProductByName);
         }
 
-        public Orders getNewOrder()
+        public void addNewOrder()
         {
             Orders order = new Orders();
             order.OrderDate = DateTime.Now;
             order.OrderTotal = 0;
             _context.Orders.Add(_mapper.ParseOrder(order));
             _context.SaveChanges();
-            return order;
         }
 
-        public OrderItem addOrderItem(OrderItem newOrderItem)
+        public void addOrderItem(OrderItem newOrderItem)
         {
             _context.OrderItems.Add(_mapper.ParseOrderItem(newOrderItem));
             _context.SaveChanges();
-            return newOrderItem;
         }
 
         public void addTrackOrderItem(TrackOrder newTrackOrder)
         {
             _context.TrackOrders.Add(_mapper.ParseTrackOrder(newTrackOrder));
             _context.SaveChanges();
+        }
+
+        public Orders getMostRecentOrder()
+        {
+            var queryMostRecentOrder = (
+                from order in _context.Orders
+                select order
+            ).ToList().LastOrDefault();
+            if (queryMostRecentOrder == null){
+                return null;
+            }
+            return _mapper.ParseOrder(queryMostRecentOrder);
+        }
+
+        public OrderItem getMostRecentOrderItem()
+        {
+            var queryMostRecentOrderItem = (
+                from order in _context.OrderItems
+                select order
+            ).ToList().LastOrDefault();
+            if (queryMostRecentOrderItem == null){
+                return null;
+            }
+            return _mapper.ParseOrderItem(queryMostRecentOrderItem);
         }
     }
 }

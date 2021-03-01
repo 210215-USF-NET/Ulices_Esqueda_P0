@@ -77,12 +77,14 @@ namespace SUI
 
         public void placeOrder(){
             //Make a new order with total equal to zero and date the time it was executed.
-            Orders order = _storeBL.addNewOrder();
+            _storeBL.addNewOrder();
+            Orders order = _storeBL.getMostRecentOrder();
             bool stillOrdering = true;
             int count = 1;
             do{
                 //Make new order item and add it to the database.
-                OrderItem newOrderItem = _storeBL.addOrderItem(getOrderDetails());
+                _storeBL.addOrderItem(getOrderDetails());
+                OrderItem newOrderItem = _storeBL.getMostRecentOrderItem();
 
                 //Add order to track order database table
                 _storeBL.addTrackOrderItem(setTrackOrderDetails(order, newOrderItem));
