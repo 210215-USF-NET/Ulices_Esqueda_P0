@@ -7,6 +7,7 @@ namespace SUI
     //Handles when a Customer visits the StoreApp
     public class CustomerMenu : IMenu
     {
+        private Customers _customer;
         private IStoreBL _storeBL;
         public CustomerMenu(IStoreBL storeBL){
             _storeBL = storeBL;
@@ -30,8 +31,8 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        Customers customer = verifyCustomer();
-                        returningCustomer(customer);
+                        verifyCustomer();
+                        returningCustomer();
                         stay = false;
                         break;
                     case "1":
@@ -55,11 +56,11 @@ namespace SUI
         }
 
         //This is the method we use when a returning customer comes back to your store.
-        public void returningCustomer(Customers customer){
+        public void returningCustomer(){
             bool stay = true;
             do
             {
-                Console.WriteLine($"Hello {customer.getCustomerFullName()} what would you like to do.");
+                Console.WriteLine($"Hello {_customer.getCustomerFullName()} what would you like to do.");
                 Console.WriteLine("[0] Visit a shop.");
                 Console.WriteLine("[1] View order history.");
                 Console.WriteLine("[2] View location history.");
@@ -72,14 +73,14 @@ namespace SUI
                 switch (userInput)
                 {
                     case "0":
-                        IMenu storeMenu = new StoreMenu(_storeBL);
-                        storeMenu.Start();
+                        StoreMenu storeMenu = new StoreMenu(_storeBL);
+                        storeMenu.Start(_customer);
                         break;
                     case "1":
-                        OrderHistory(customer);
+                        OrderHistory();
                         break;
                     case "2":
-                        LocationHistory(customer);
+                        LocationHistory();
                         break;
                     case "q":
                     case "Q":
@@ -93,15 +94,14 @@ namespace SUI
             } while (stay);
         }
 
-        public Customers verifyCustomer(){
-            Customers customer = new Customers();
+        public void verifyCustomer(){
             bool stay = false;
             int count = 0;
             do
             {
                 Console.WriteLine("Please enter your email: ");
-                customer = _storeBL.getCustomerByEmail(Console.ReadLine());
-                if (customer == null){
+                _customer = _storeBL.getCustomerByEmail(Console.ReadLine());
+                if (_customer == null){
                     Console.WriteLine("That email does not exist.");
                     stay = true;
                     count++;
@@ -111,15 +111,13 @@ namespace SUI
                     Exit();
                 }
             } while(stay);
-            
-            return customer;
         }
         //This method is used to create a new user in your database.
         public void newCustomer(){
             Console.WriteLine("Hello and welcome to (EnterShopName). Thank you for signing up.");
             Console.WriteLine("We are just going to need some basic information to get started.");
-            Customers customer =_storeBL.addCustomer(GetCustomerDetails());
-            returningCustomer(customer);
+            _customer =_storeBL.addCustomer(GetCustomerDetails());
+            returningCustomer();
         }
 
         public Customers GetCustomerDetails(){
@@ -144,12 +142,12 @@ namespace SUI
             
         // }
         
-        public void OrderHistory(Customers customer){
-            _storeBL.getOrderHistory(customer);
+        public void OrderHistory(){
+            _storeBL.getOrderHistory(_customer);
         }
 
-        public void LocationHistory(Customers customer){
-            _storeBL.getLocationHistory(customer);
+        public void LocationHistory(){
+            _storeBL.getLocationHistory(_customer);
         }
 
         public void Exit(){

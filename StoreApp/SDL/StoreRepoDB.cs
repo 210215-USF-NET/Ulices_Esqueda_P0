@@ -41,6 +41,17 @@ namespace SDL
             }
         }
 
+        public void getAllStoreNames(){
+            var queryAllStoreLocations = (
+                from store in _context.Stores
+                select store
+            );
+            foreach (var item in queryAllStoreLocations)
+            {
+                Console.WriteLine(item.StoreName);
+            }
+        }
+
         public void getOrderHistory(Model.Customers customer)
         {
             var queryCustomerOrderHistory = (
@@ -81,6 +92,24 @@ namespace SDL
             _context.Customers.Add(_mapper.ParseCustomer(newCustomer));
             _context.SaveChanges();
             return newCustomer;
+        }
+
+        public Store getStoreByName(string storeName)
+        {
+            var queryStoreByName = (
+                from store in _context.Stores
+                where store.StoreName == storeName
+                select store).ToList().FirstOrDefault();
+            if (queryStoreByName == null){
+                return null;
+            }
+            return _mapper.ParseStore(queryStoreByName);
+        }
+
+        public void addVisistedStore(LocationVisited location)
+        {
+            _context.LocationVisiteds.Add(_mapper.ParseLocation(location));
+            _context.SaveChanges();
         }
     }
 }

@@ -124,7 +124,7 @@ namespace SDL
                 StoreID = store.StoreId,
                 StoreName = store.StoreName,
                 StoreLocation = store.StoreLocation,
-                StoreManager = ParseManager(store.StoreManager)
+                //StoreManager = ParseManager(store.StoreManager)
             };
         }
 
@@ -134,7 +134,7 @@ namespace SDL
                 StoreId = store.StoreID,
                 StoreName = store.StoreName,
                 StoreLocation = store.StoreLocation,
-                StoreManagerId = store.StoreManager.ManagerID
+                //StoreManagerId = store.StoreManager.ManagerID
             };
         }
 

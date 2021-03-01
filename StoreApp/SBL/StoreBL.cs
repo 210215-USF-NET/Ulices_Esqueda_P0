@@ -24,6 +24,14 @@ namespace SBL
             _repo.getLocationHistory(customer);
         }
 
+        public void getAllStoreNames(){
+            _repo.getAllStoreNames();
+        }
+
+        public Store getStoreByName(String storeName){
+            return _repo.getStoreByName(storeName);
+        }
+
         public void PlaceOrder(Orders newOrder){
             _repo.PlaceOrder(newOrder);
         }
@@ -35,6 +43,11 @@ namespace SBL
         public Customers addCustomer(Customers newCustomer)
         {
             return _repo.addCustomer(newCustomer);
+        }
+
+        public void addVisistedStore(LocationVisited store)
+        {
+            _repo.addVisistedStore(store);
         }
     }
 }
