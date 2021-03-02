@@ -39,10 +39,10 @@ namespace SUI
                 Console.WriteLine("|" + addDynamicString(result, "=") + "|");
                 Console.WriteLine("|" + addDynamicString(result, " ") + "|");
                 if (returningValue == 1){
-                    Console.WriteLine("| I see you're done ordering. What else would you like to do? |");
+                    Console.WriteLine("| I see you're done ordering. What else would you like to do?" + addDynamicString(result - 60, " ") + "|");
                 }
                 else if (returningValue == 2){
-                    Console.WriteLine("| Do you see anything you like? What now? |");
+                    Console.WriteLine("| Do you see anything you like? What now?" + addDynamicString(result - 40, " ") + "|");
                 }
                 else{
                     Console.WriteLine($"| Welcome to { _store.StoreName }. What would you like to do?" + addDynamicString(result - 40 - nameLength, " ") + "|");
@@ -67,8 +67,15 @@ namespace SUI
                         returningValue = 2;
                         break;
                     case "1":
-                        placeOrder();
-                        returningValue = 1;
+                        if (_storeBL.checkStoreInventory(_store)){
+                            placeOrder();
+                            returningValue = 1;
+                        }
+                        else{
+                            Console.Clear();
+                            Console.WriteLine("This inventory is empty and there is nothing to place an order for!");
+                            returningValue = 0;
+                        }
                         break;
                     case "q":
                     case "Q":
@@ -86,6 +93,7 @@ namespace SUI
 
         public void placeOrder(){
             Console.Clear();
+            int total= 0;
             //Make a new order with total equal to zero and date the time it was executed.
             _storeBL.addNewOrder();
             Orders order = _storeBL.getMostRecentOrder();
@@ -95,7 +103,7 @@ namespace SUI
                 //Make new order item and add it to the database.
                 _storeBL.addOrderItem(getOrderDetails());
                 OrderItem newOrderItem = _storeBL.getMostRecentOrderItem();
-
+                total += newOrderItem.Product.Price * newOrderItem.ProductQuantity;
                 //Add order to track order database table
                 _storeBL.addTrackOrderItem(setTrackOrderDetails(order, newOrderItem));
 
@@ -136,6 +144,8 @@ namespace SUI
             } while(stillOrdering);
             
             //Find out the order total and update the order total value.
+            order.OrderTotal = total;
+            _storeBL.updateOrderTotal(order);
             Console.Clear();
         }
 
@@ -146,7 +156,7 @@ namespace SUI
             do {
                 Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                 Console.WriteLine("Enter the item you would like to add: ");
-                _product = _storeBL.getProductByName(Console.ReadLine());
+                _product = _storeBL.getStoreProductByName(Console.ReadLine(), _store);
                 Console.WriteLine("");
                 if (_product == null){
                     Console.WriteLine("-----------------------------------------------------------------------------------------------------");

@@ -21,11 +21,14 @@ namespace SBL
         void getStoreInventory(Store store);
         void getCustomerByName(String customerName);
         void getAllProducts();
+        void updateOrderTotal(Orders total);
         Store getStoreByName(String storeName);
         Customers getCustomerByEmail(String email);
         Product getProductByName(String productName);
+        Product getStoreProductByName(String productName, Store store);
         Orders getMostRecentOrder();
         OrderItem getMostRecentOrderItem();
         Manager getManagerByFirstName(String managerName);
+        bool checkStoreInventory(Store store);
     }
 }

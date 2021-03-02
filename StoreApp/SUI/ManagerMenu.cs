@@ -19,17 +19,17 @@ namespace SUI
             bool stay = true;
             do
             {
-                int inputvalue = 36;
+                int inputvalue = 50;
                 int nameLength = _manager.ManagerFirstName.Length;
                 int result = inputvalue + nameLength;
                 Console.WriteLine("|" + addDynamicString(result, "=") + "|");
                 Console.WriteLine("|" + addDynamicString(result, " ") + "|");
-                Console.WriteLine($"| Hello { _manager.ManagerFirstName }. What would you like to do? |");
+                Console.WriteLine($"| Hello { _manager.ManagerFirstName }. What would you like to do?" + addDynamicString(result - 35 - nameLength, " ") + "|");
                 Console.WriteLine("|" + addDynamicString(result, " ") + "|");
                 Console.WriteLine("|" + addDynamicString(result, "-") + "|");
                 Console.WriteLine("|" + addDynamicString(result, " ") + "|");
                 Console.WriteLine("| [0] Replenish inventory" + addDynamicString(result - 24, " ") + "|");
-                Console.WriteLine("| [1] View order history of your managed locations" + addDynamicString(result - 39, " ") + "|");
+                Console.WriteLine("| [1] View order history of your managed locations" + addDynamicString(result - 49, " ") + "|");
                 Console.WriteLine("| [2] View customer by name" + addDynamicString(result - 26, " ") + "|");
                 Console.WriteLine("| [Q] Pess 'q' to exit." + addDynamicString(result - 22, " ") + "|");
                 Console.WriteLine("|" + addDynamicString(result, " ") + "|");
@@ -77,6 +77,9 @@ namespace SUI
                     stay = true;
                     count++;
                 }
+                else{
+                    stay = false;
+                }
                 if (count > 3){
                     Console.WriteLine("You entered the wrong name too many times.");
                     Exit();
@@ -87,11 +90,24 @@ namespace SUI
         public void chooseStoreLocation(){
             Console.Clear();
             //Todo: get fucntion to find the store with the longest name
-            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++");
+            Console.WriteLine("-------------------------------------");
             _storeBL.getAllStoreNames(_manager);
-            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++");
-            Console.WriteLine("Enter the name of the store you want to manage: ");
-            _store = _storeBL.getStoreByName(Console.ReadLine());
+            Console.WriteLine("-------------------------------------");
+            bool stay = true;
+            do {
+                Console.WriteLine("Enter the name of the store you want to manage: ");
+                _store = _storeBL.getStoreByName(Console.ReadLine());
+                if (_store == null){
+                    Console.WriteLine("");
+                    Console.WriteLine("You are either not the manager of that store or you didn't enter it correctly.");
+                    Console.WriteLine("Please try again");
+                    Console.WriteLine("");
+                }
+                else{
+                    stay = false;
+                }
+            } while(stay);
+            
             Console.Clear();
         }
         public void replenishInventory(){
@@ -101,7 +117,11 @@ namespace SUI
             Console.WriteLine("|                                                                  |");
             _storeBL.getAllProducts();
             Console.WriteLine("|==================================================================|");
-            _storeBL.addProductToInventory(getProductDetails());
+            try{
+                _storeBL.addProductToInventory(getProductDetails());
+            } catch(Exception e){
+                Console.WriteLine("_");
+            }
             Console.WriteLine("Please enter any key to continue");
             Console.ReadLine();
             Console.Clear();

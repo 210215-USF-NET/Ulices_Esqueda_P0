@@ -77,7 +77,7 @@ namespace SDL
             else{
                 foreach (var item in queryCustomerOrderHistory)
                 {
-                    Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 11} |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
                 }
             }
         }
@@ -127,6 +127,19 @@ namespace SDL
             }
             return _mapper.ParseProduct(queryProductByName);
         }
+        public Product getStoreProductByName(string productName, Store storeName)
+        {
+            var queryProductByName = (
+                from product in _context.Products
+                join store in _context.StoreInventories on product.ProductId equals store.ProductId
+                where product.ProductName == productName
+                where store.StoreId == storeName.StoreID
+                select product).ToList().FirstOrDefault();
+            if (queryProductByName == null){
+                return null;
+            }
+            return _mapper.ParseProduct(queryProductByName);
+        }
 
         public void addNewOrder()
         {
@@ -153,7 +166,7 @@ namespace SDL
                 _context.StoreInventories.Add(_mapper.ParseStoreInventory(newStoreInventory));
                 _context.SaveChanges();
             } catch(Exception e){
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
                 //Do nothing and continue.
             }
         }
@@ -205,6 +218,19 @@ namespace SDL
                 }
             }
         }
+        public bool checkStoreInventory(Store store){
+            var queryInventory = (
+                from inv in _context.StoreInventories
+                join prod in _context.Products on inv.ProductId equals prod.ProductId
+                select new {prod.ProductName, prod.ProductPrice, inv.InventoryQuantity}
+            );
+            if (!queryInventory.Any()){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
         public Manager getManagerByFirstName(String name){
             var queryManagerByFirstName = (
                 from manager in _context.Managers
@@ -241,6 +267,14 @@ namespace SDL
             {
                 Console.WriteLine(String.Format("| {0, -64} |", item.ProductName));
             }
+        }
+
+        public void updateOrderTotal(Orders orderTotalUpdate)
+        {
+            Entity.Order oldOrder = _context.Orders.Find(orderTotalUpdate.OrderID);
+            _context.Entry(oldOrder).CurrentValues.SetValues(_mapper.ParseOrder(orderTotalUpdate));
+
+            _context.SaveChanges();
         }
     }
 }

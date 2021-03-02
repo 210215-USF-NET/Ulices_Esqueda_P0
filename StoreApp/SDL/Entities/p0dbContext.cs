@@ -69,12 +69,12 @@ namespace SDL.Entities
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.LocationVisiteds)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__LocationV__Custo__1CBC4616");
+                    .HasConstraintName("FK__LocationV__Custo__7D0E9093");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.LocationVisiteds)
                     .HasForeignKey(d => d.StoreId)
-                    .HasConstraintName("FK__LocationV__Store__1DB06A4F");
+                    .HasConstraintName("FK__LocationV__Store__7E02B4CC");
             });
 
             modelBuilder.Entity<Manager>(entity =>
@@ -98,7 +98,7 @@ namespace SDL.Entities
             {
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.OrderDate).HasColumnType("date");
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<OrderItem>(entity =>
@@ -112,7 +112,7 @@ namespace SDL.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderItems)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__OrderItem__Produ__339FAB6E");
+                    .HasConstraintName("FK__OrderItem__Produ__7755B73D");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -148,7 +148,7 @@ namespace SDL.Entities
                 entity.HasOne(d => d.StoreManager)
                     .WithMany(p => p.Stores)
                     .HasForeignKey(d => d.StoreManagerId)
-                    .HasConstraintName("FK__Store__StoreMana__19DFD96B");
+                    .HasConstraintName("FK__Store__StoreMana__7A3223E8");
             });
 
             modelBuilder.Entity<StoreInventory>(entity =>
@@ -164,12 +164,12 @@ namespace SDL.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.StoreInventories)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__StoreInve__Produ__2180FB33");
+                    .HasConstraintName("FK__StoreInve__Produ__01D345B0");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.StoreInventories)
                     .HasForeignKey(d => d.StoreId)
-                    .HasConstraintName("FK__StoreInve__Store__208CD6FA");
+                    .HasConstraintName("FK__StoreInve__Store__00DF2177");
             });
 
             modelBuilder.Entity<TrackOrder>(entity =>
@@ -189,22 +189,22 @@ namespace SDL.Entities
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.TrackOrders)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__TrackOrde__Custo__367C1819");
+                    .HasConstraintName("FK__TrackOrde__Custo__04AFB25B");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.TrackOrders)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__TrackOrde__Order__37703C52");
+                    .HasConstraintName("FK__TrackOrde__Order__05A3D694");
 
                 entity.HasOne(d => d.OrderItem)
                     .WithMany(p => p.TrackOrders)
                     .HasForeignKey(d => d.OrderItemId)
-                    .HasConstraintName("FK__TrackOrde__Order__3864608B");
+                    .HasConstraintName("FK__TrackOrde__Order__0697FACD");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.TrackOrders)
                     .HasForeignKey(d => d.StoreId)
-                    .HasConstraintName("FK__TrackOrde__Store__395884C4");
+                    .HasConstraintName("FK__TrackOrde__Store__078C1F06");
             });
 
             OnModelCreatingPartial(modelBuilder);

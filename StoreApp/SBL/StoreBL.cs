@@ -110,5 +110,20 @@ namespace SBL
         {
             _repo.getAllStoreNames(manager);
         }
+
+        public void updateOrderTotal(Orders total)
+        {
+            _repo.updateOrderTotal(total);
+        }
+
+        public Product getStoreProductByName(string productName, Store store)
+        {
+            return _repo.getStoreProductByName(productName, store);
+        }
+
+        public bool checkStoreInventory(Store store)
+        {
+            return _repo.checkStoreInventory(store);
+        }
     }
 }

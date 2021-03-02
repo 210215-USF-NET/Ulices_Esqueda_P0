@@ -21,11 +21,14 @@ namespace SDL
         void getCustomerByName(String customerName);
         void getAllProducts();
         void getAllStoreNames(Manager manager);
+        void updateOrderTotal(Orders total);
         Store getStoreByName(String storeName);
         Product getProductByName(String productName);
+        Product getStoreProductByName(String productName, Store store);
         Customers getCustomerByEmail(String email);
         Orders getMostRecentOrder();
         OrderItem getMostRecentOrderItem();
         Manager getManagerByFirstName(String managerName);
+        bool checkStoreInventory(Store store);
     }
 }

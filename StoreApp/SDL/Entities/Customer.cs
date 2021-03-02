@@ -18,7 +18,6 @@ namespace SDL.Entities
         public string CustomerLastName { get; set; }
         public string CustomerEmail { get; set; }
         public string CustomerPhoneNumber { get; set; }
-        
 
         public virtual ICollection<LocationVisited> LocationVisiteds { get; set; }
         public virtual ICollection<TrackOrder> TrackOrders { get; set; }
