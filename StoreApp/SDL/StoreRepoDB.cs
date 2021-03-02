@@ -27,7 +27,7 @@ namespace SDL
                 from loc in _context.LocationVisiteds
                 join store in _context.Stores on loc.StoreId equals store.StoreId
                 where loc.CustomerId == customer.CustomerID
-                select new {store.StoreLocation}
+                select new {store.StoreName, store.StoreLocation}
             ).Distinct();
             if(!queryCustomerLocationHistory.Any()){
                 Console.WriteLine("Seems like you haven't visited any stores.");
@@ -36,7 +36,7 @@ namespace SDL
             else {
                 foreach (var item in queryCustomerLocationHistory)
                 {
-                    Console.WriteLine($"You've been to: {item.StoreLocation}");
+                    Console.WriteLine("| {0, -20} | {1, 20} |", item.StoreName, item.StoreLocation);
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace SDL
             );
             foreach (var item in queryAllStoreLocations)
             {
-                Console.WriteLine($"- {item.StoreName}");
+                Console.WriteLine(String.Format("| {0, -25} |", item.StoreName));
             }
         }
 
@@ -67,7 +67,7 @@ namespace SDL
             else{
                 foreach (var item in queryCustomerOrderHistory)
                 {
-                    Console.WriteLine($"Order {item.OrderId}, OrderDate: {item.OrderDate}, Order Total: {item.OrderTotal}");
+                    Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 11} |", item.OrderId, item.OrderDate, item.OrderTotal));
                 }
             }
         }
@@ -138,6 +138,19 @@ namespace SDL
             _context.TrackOrders.Add(_mapper.ParseTrackOrder(newTrackOrder));
             _context.SaveChanges();
         }
+        public void addProductToInventory(StoreInventory newStoreInventory){
+            try{
+                _context.StoreInventories.Add(_mapper.ParseStoreInventory(newStoreInventory));
+                _context.SaveChanges();
+            } catch(Exception e){
+                Console.WriteLine(e);
+                //Do nothing and continue.
+            }
+        }
+        public void addProductToDb(Product newProduct){
+            _context.Products.Add(_mapper.ParseProduct(newProduct));
+            _context.SaveChanges();
+        }
 
         public Orders getMostRecentOrder()
         {
@@ -191,6 +204,33 @@ namespace SDL
                 return null;
             }
             return _mapper.ParseManager(queryManagerByFirstName);
+        }
+
+        public void getCustomerByName(string customerName)
+        {
+            var queryCustomersByName = (from cust in _context.Customers
+                                        where cust.CustomerFirstName == customerName
+                                        select cust).ToList().FirstOrDefault();
+
+            if (queryCustomersByName == null){
+                Console.WriteLine("There seems to be no customers with that name. Try another name.");
+            }
+            else{
+                Console.WriteLine($"Customer name: { queryCustomersByName.CustomerFirstName } {queryCustomersByName.CustomerLastName}\nCustomer email: {queryCustomersByName.CustomerEmail}\nCustomer phone number: { queryCustomersByName.CustomerPhoneNumber }");
+
+            }
+        }
+
+        public void getAllProducts()
+        {
+            var queryAllProducts = (
+                from product in _context.Products
+                select product
+            );
+            foreach (var item in queryAllProducts)
+            {
+                Console.WriteLine(String.Format("| {0, -64} |", item.ProductName));
+            }
         }
     }
 }

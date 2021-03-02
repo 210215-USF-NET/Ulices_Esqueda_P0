@@ -14,17 +14,24 @@ namespace SUI
         public void Start(){
 
             //Menu Start
-            Console.WriteLine("Welcome to NoxInc Store Application!");
-            Console.WriteLine("Are you a Customer or a Manager?");
-            Console.WriteLine("[0] I am a Customer");
-            Console.WriteLine("[1] I am a Manager");
-            Console.WriteLine("[Q] Press 'q' to exit.");
-
+            Console.Clear();
             bool stay = true;
             do
             {
+                Console.WriteLine("|======================================|");
+                Console.WriteLine("|                                      |");
+                Console.WriteLine("| Welcome to NoxInc Store Application! |");
+                Console.WriteLine("| Are you a Customer or a Manager?     |");
+                Console.WriteLine("|                                      |");
+                Console.WriteLine("|--------------------------------------|");
+                Console.WriteLine("|                                      |");
+                Console.WriteLine("| [0] I am a Customer                  |");
+                Console.WriteLine("| [1] I am a Manager                   |");
+                Console.WriteLine("| [Q] Press 'q' to exit.               |");
+                Console.WriteLine("|                                      |");
                 //Get user Input
-                Console.WriteLine("Enter a number: ");
+                Console.WriteLine("|--------------------------------------|");
+                Console.WriteLine("| Enter a number:                      |");
                 string userInput = Console.ReadLine();
 
                 switch (userInput)
@@ -45,7 +52,9 @@ namespace SUI
                         stay = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid input please choose from the given options.");
+                        Console.Clear();
+                        Console.WriteLine("!!!!Invalid input please choose from the given options.!!!!");
+                        Console.WriteLine("");
                         break;
                 }
             } while (stay);

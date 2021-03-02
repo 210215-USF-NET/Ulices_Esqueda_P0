@@ -85,5 +85,25 @@ namespace SBL
         {
             return _repo.getManagerByFirstName(managerName);
         }
+
+        public void getCustomerByName(string customerName)
+        {
+            _repo.getCustomerByName(customerName);
+        }
+
+        public void getAllProducts()
+        {
+            _repo.getAllProducts();
+        }
+
+        public void addProductToInventory(StoreInventory storeInventory)
+        {
+            _repo.addProductToInventory(storeInventory);
+        }
+
+        public void addProductToDb(Product product)
+        {
+            _repo.addProductToDb(product);
+        }
     }
 }

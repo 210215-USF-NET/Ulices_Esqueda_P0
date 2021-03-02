@@ -15,7 +15,11 @@ namespace SBL
         void addNewOrder();
         void addOrderItem(OrderItem newOrderItem);
         void addTrackOrderItem(TrackOrder newTrackOrder);
+        void addProductToInventory(StoreInventory storeInventory);
+        void addProductToDb(Product product);
         void getStoreInventory(Store store);
+        void getCustomerByName(String customerName);
+        void getAllProducts();
         Store getStoreByName(String storeName);
         Customers getCustomerByEmail(String email);
         Product getProductByName(String productName);

@@ -16,16 +16,11 @@ namespace SUI
         //Handles when a manager or customer comes in a store.
         public void Start(Customers customer){
             _customer = customer;
-            
             Start();
         }
         public void Start(){
-            Console.WriteLine("====================================================================================================");
-            Console.WriteLine("");
-            Console.WriteLine("All store locations: ");
-            Console.WriteLine("");
-            _storeBL.getAllStoreNames();
-            //TODO: Some form of input Validation, but thats for later (Stretch Goal)
+            Console.Clear();
+            showStoreLocations();
             verifyStore();
             if (_customer != null){
                 LocationVisited location = new LocationVisited();
@@ -33,28 +28,35 @@ namespace SUI
                 location.Store = _store;
                 _storeBL.addVisistedStore(location);
             }
-
+            Console.Clear();
             bool stay = true;
             int returningValue = 0;
             do
             {
-                Console.WriteLine("");
+                int inputValue = checkLargestString();
+                int nameLength = _store.StoreName.Length;
+                int result = inputValue + nameLength;
+                Console.WriteLine("|" + addDynamicString(result, "=") + "|");
+                Console.WriteLine("|" + addDynamicString(result, " ") + "|");
                 if (returningValue == 1){
-                    Console.WriteLine($"I see you're done ordering. What else would you like to do?");
+                    Console.WriteLine("| I see you're done ordering. What else would you like to do? |");
                 }
                 else if (returningValue == 2){
-                    Console.WriteLine($"Do you see anything you like? What now?");
+                    Console.WriteLine("| Do you see anything you like? What now? |");
                 }
                 else{
-                    Console.WriteLine($"Welcome to { _store.StoreName }. What would you like to do?");
+                    Console.WriteLine($"| Welcome to { _store.StoreName }. What would you like to do?" + addDynamicString(result - 40 - nameLength, " ") + "|");
                 }
-                Console.WriteLine("[0] Look at inventory.");
-                Console.WriteLine("[1] Place an order.");
-                Console.WriteLine("[Q] Return to main menu.");
-
+                Console.WriteLine("|" + addDynamicString(result, " ") + "|");
+                Console.WriteLine("|" + addDynamicString(result, "-") + "|");
+                Console.WriteLine("|" + addDynamicString(result, " ") + "|");
+                Console.WriteLine("| [0] Look at inventory." + addDynamicString(result - 23, " ") + "|");
+                Console.WriteLine("| [1] Place an order." + addDynamicString(result - 20, " ") + "|");
+                Console.WriteLine("| [Q] Return to main menu." + addDynamicString(result - 25, " ") + "|");
+                Console.WriteLine("|" + addDynamicString(result, " ") + "|");
             
                 //Get user Input
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                Console.WriteLine("|" + addDynamicString(result, "-") + "|");
                 Console.WriteLine("Enter a number: ");
                 string userInput = Console.ReadLine();
 
@@ -74,13 +76,16 @@ namespace SUI
                         stay = false;
                         break;
                     default:
+                    Console.Clear();
                         Console.WriteLine("Invalid input please choose from the given options.");
                         break;
                 }
             } while (stay);
+            Console.Clear();
         }
 
         public void placeOrder(){
+            Console.Clear();
             //Make a new order with total equal to zero and date the time it was executed.
             _storeBL.addNewOrder();
             Orders order = _storeBL.getMostRecentOrder();
@@ -101,14 +106,17 @@ namespace SUI
                 //TODO: Add the structures needed to add this functionality.
                 // Orders newOrder = new Orders();
                 // Product newProduct = new Product();
-
+                Console.WriteLine("");
                 Console.WriteLine("Item successfully added to list.");
-                
+                Console.WriteLine("");
                 if (count > 0){
+                    Console.WriteLine("-----------------------------------");
                     Console.WriteLine("Are you still shopping?");
                     Console.WriteLine("[Y] Yes, I am still shopping.");
                     Console.WriteLine("[N] No, I am done shopping.");
+                    Console.WriteLine("-----------------------------------");
                     string userInput = Console.ReadLine();
+                    Console.WriteLine("");
                     switch (userInput)
                     {
                         case "y":
@@ -120,25 +128,31 @@ namespace SUI
                             stillOrdering = false;
                             break;
                         default:
+                            Console.WriteLine("Please choose from the given options.");
                             break;
                     }
                 }
                 count++;
             } while(stillOrdering);
-
+            
             //Find out the order total and update the order total value.
+            Console.Clear();
         }
 
         public OrderItem getOrderDetails(){
+            Console.Clear();
             OrderItem newOrderItem = new OrderItem();
-
             bool productTruth = true;
             do {
+                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                 Console.WriteLine("Enter the item you would like to add: ");
                 _product = _storeBL.getProductByName(Console.ReadLine());
+                Console.WriteLine("");
                 if (_product == null){
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("This item is not available in this store.");
                     Console.WriteLine("Maybe try another store or check your spelling.");
+                    Console.WriteLine("");
                     productTruth = false;
                 }
                 else{
@@ -148,9 +162,11 @@ namespace SUI
             newOrderItem.Product = _product;
                 
              //TODO: Input Validation
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
             Console.WriteLine($"Enter the quantity you would like to add of { _product.ProductName }: ");
             newOrderItem.ProductQuantity = int.Parse(Console.ReadLine());
-
+            Console.WriteLine("");
+            Console.Clear();
             return newOrderItem;
         }
 
@@ -163,26 +179,35 @@ namespace SUI
             return trackOrderItem ;
         }
         public void getInventory(){
+            Console.Clear();
             Console.WriteLine("====================================================================================================");
             Console.WriteLine("");
             _storeBL.getStoreInventory(_store);
             Console.WriteLine("");
             Console.WriteLine("====================================================================================================");
+            Console.WriteLine("Please push any button to continue: ");
+            Console.ReadLine();
+            Console.Clear();
         }
-        
+        public void showStoreLocations(){
+            int inputInt = 27;
+            Console.WriteLine("|" + addDynamicString(inputInt, "=") + "|");
+            Console.WriteLine("|" + addDynamicString(inputInt, " ") + "|");
+            Console.WriteLine("| All store locations:" + addDynamicString(inputInt - 21, " ") + "|");
+            Console.WriteLine("|" + addDynamicString(inputInt, "-") + "|");
+            _storeBL.getAllStoreNames();
+            Console.WriteLine("|" + addDynamicString(inputInt, "=") + "|");
+        }
         public void verifyStore(){
             bool stay = false;
             int count = 0;
-            Console.WriteLine("");
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine("");
             do
             {
+                Console.WriteLine("");
                 Console.WriteLine("What store location would you like to visit?");
                 _store = _storeBL.getStoreByName(Console.ReadLine());
                 Console.WriteLine("");
                 if (_store == null){
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
                     Console.WriteLine("That store does not exist. Please enter from the list given.");
                     stay = true;
                     count++;
@@ -191,12 +216,25 @@ namespace SUI
                     stay = false;
                 }
                 if (count > 3){
-                    Console.WriteLine("====================================================================================================");
+                    Console.Clear();
                     Console.WriteLine("Here is the list of stores again: ");
-                    _storeBL.getAllStoreNames();
+                    showStoreLocations();
                 }
             } while(stay);
-            Console.WriteLine("====================================================================================================");
-        } 
+            Console.Clear();
+        }     
+        public string addDynamicString(int howMany, string theChar){
+            string output = "";
+            for (int i = 0; i != howMany; i++){
+                output += theChar;
+            }
+            return output;
+        }
+        public int checkLargestString(){
+            int first = "I see you're done ordering. What else would you like to do?".Length;
+            int second = "Do you see anything you like? What now?".Length;
+            int third = "Welcome to { _store.StoreName }. What would you like to do?".Length;
+            return Math.Max(first, Math.Max(second, third));
+        }
     }
 }
