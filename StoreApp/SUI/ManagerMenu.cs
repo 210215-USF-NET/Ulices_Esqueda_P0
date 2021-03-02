@@ -15,6 +15,7 @@ namespace SUI
         //Handles when a Manager enters the StoreApp
         public void Start(){
             verifyManager();
+            chooseStoreLocation();
             bool stay = true;
             do
             {
@@ -63,7 +64,6 @@ namespace SUI
             } while (stay);
             Console.Clear();
         }
-
         public void verifyManager(){
             bool stay = false;
             int count = 0;
@@ -82,6 +82,16 @@ namespace SUI
                     Exit();
                 }
             } while(stay);
+            Console.Clear();
+        }
+        public void chooseStoreLocation(){
+            Console.Clear();
+            //Todo: get fucntion to find the store with the longest name
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++");
+            _storeBL.getAllStoreNames(_manager);
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++");
+            Console.WriteLine("Enter the name of the store you want to manage: ");
+            _store = _storeBL.getStoreByName(Console.ReadLine());
             Console.Clear();
         }
         public void replenishInventory(){
@@ -120,15 +130,16 @@ namespace SUI
                 Console.WriteLine("| Enter the quantity of the product you want to add: |");
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out quantity)){
-                    Console.WriteLine("| Invalid input please enter a valid whole number!!  |");
-                }
-                else
-                {
+                    
                     newItem2Add.InventoryQuantity = quantity;
                     loop = false;
                 }
+                else
+                {
+                    Console.WriteLine("| Invalid input please enter a valid whole number!!  |");
+                }
             }
-            
+            newItem2Add.Store = _store;
             return newItem2Add;
         }
         public void addProductToDb(string input){
@@ -153,11 +164,11 @@ namespace SUI
                             Console.WriteLine("| Enter the value of the product as an integer:               |");
                             string valueOfProduct = Console.ReadLine();
                             if (int.TryParse(valueOfProduct, out actualValue)){
-                                Console.WriteLine("| Invalid input please enter a valid whole number!!           |");
+                                loop = false;
                             }
                             else
                             {
-                                loop = false;
+                                Console.WriteLine("| Invalid input please enter a valid whole number!!           |");
                             }
                         }
                         _storeBL.addProductToDb(setProductDetails(input, actualValue));
@@ -190,12 +201,14 @@ namespace SUI
             Console.Clear();
             Console.WriteLine("Enter the name of the customer you want to search for.");
             _storeBL.getCustomerByName(Console.ReadLine());
+            Console.WriteLine("");
+            Console.WriteLine("Press any button to continue");
+            Console.ReadLine();
             Console.Clear();
         }
         public void Exit(){
             System.Environment.Exit(0);
         }
-    
         public string addDynamicString(int howMany, string theChar){
             string output = "";
             for (int i = 0; i != howMany; i++){

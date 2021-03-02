@@ -51,7 +51,17 @@ namespace SDL
                 Console.WriteLine(String.Format("| {0, -25} |", item.StoreName));
             }
         }
-
+        public void getAllStoreNames(Manager manager){
+            var queryAllStoreLocations = (
+                from store in _context.Stores
+                where store.StoreManagerId == manager.ManagerID
+                select store
+            );
+            foreach (var item in queryAllStoreLocations)
+            {
+                Console.WriteLine(String.Format("| {0, -25} |", item.StoreName));
+            }
+        }
         public void getOrderHistory(Model.Customers customer)
         {
             var queryCustomerOrderHistory = (

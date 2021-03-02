@@ -10,6 +10,7 @@ namespace SBL
         void getOrderHistory(Customers customer);
         void getLocationHistory(Customers customer);
         void getAllStoreNames();
+        void getAllStoreNames(Manager manager);
         void addCustomer(Customers newCustomer);
         void addVisistedStore(LocationVisited store);
         void addNewOrder();

@@ -105,5 +105,10 @@ namespace SBL
         {
             _repo.addProductToDb(product);
         }
+
+        public void getAllStoreNames(Manager manager)
+        {
+            _repo.getAllStoreNames(manager);
+        }
     }
 }

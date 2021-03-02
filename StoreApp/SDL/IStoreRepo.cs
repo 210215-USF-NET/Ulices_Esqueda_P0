@@ -20,6 +20,7 @@ namespace SDL
         void getStoreInventory(Store store);
         void getCustomerByName(String customerName);
         void getAllProducts();
+        void getAllStoreNames(Manager manager);
         Store getStoreByName(String storeName);
         Product getProductByName(String productName);
         Customers getCustomerByEmail(String email);
