@@ -156,7 +156,7 @@ namespace SUI
             Console.Clear();
             Console.WriteLine("|==================================================================|");
             Console.WriteLine("|                                                                  |");
-            Console.WriteLine("| Hello and welcome to (EnterShopName). Thank you for signing up.  |");
+            Console.WriteLine("| Hello and welcome to NoxInc. Thank you for signing up.           |");
             Console.WriteLine("| We are just going to need some basic information to get started. |");
             _storeBL.addCustomer(getCustomerDetails());
             _customer = _storeBL.getCustomerByEmail(_customer.Email);
