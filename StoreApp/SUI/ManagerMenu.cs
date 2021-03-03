@@ -31,6 +31,7 @@ namespace SUI
                 Console.WriteLine("| [0] Replenish inventory" + addDynamicString(result - 24, " ") + "|");
                 Console.WriteLine("| [1] View order history of your managed locations" + addDynamicString(result - 49, " ") + "|");
                 Console.WriteLine("| [2] View customer by name" + addDynamicString(result - 26, " ") + "|");
+                Console.WriteLine("| [3] View store inventory" + addDynamicString(result - 25, " ") + "|");
                 Console.WriteLine("| [Q] Pess 'q' to exit." + addDynamicString(result - 22, " ") + "|");
                 Console.WriteLine("|" + addDynamicString(result, " ") + "|");
                 //Get user Input
@@ -49,6 +50,9 @@ namespace SUI
                         break;
                     case "2":
                         viewCustomerByName();
+                        break;
+                    case "3":
+                        viewStoreInventory();
                         break;
                     case "q":
                     case "Q":
@@ -90,9 +94,9 @@ namespace SUI
         public void chooseStoreLocation(){
             Console.Clear();
             //Todo: get fucntion to find the store with the longest name
-            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("-----------------------------");
             _storeBL.getAllStoreNames(_manager);
-            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("-----------------------------");
             bool stay = true;
             do {
                 Console.WriteLine("Enter the name of the store you want to manage: ");
@@ -294,10 +298,24 @@ namespace SUI
         }
         public void viewCustomerByName(){
             Console.Clear();
-            Console.WriteLine("Enter the name of the customer you want to search for.");
+            Console.WriteLine("Enter the First name of the customer you want to search for.");
             _storeBL.getCustomerByName(Console.ReadLine());
             Console.WriteLine("");
             Console.WriteLine("Press any button to continue");
+            Console.ReadLine();
+            Console.Clear();
+        }
+        public void viewStoreInventory(){
+            Console.Clear();
+            Console.WriteLine("|" + addDynamicString(68, "=") + "|");
+            Console.WriteLine("|" + addDynamicString(68, " ") + "|");
+            Console.WriteLine("|" + addDynamicString(68, "-") + "|");
+            Console.WriteLine("|     Product Name     |     Product Price    |   Product Quantity   |");
+            Console.WriteLine("|" + addDynamicString(68, "-") + "|");
+            _storeBL.getStoreInventory(_store);
+            Console.WriteLine("|" + addDynamicString(68, "=") + "|");
+            Console.WriteLine("");
+            Console.WriteLine("Press any key to continue");
             Console.ReadLine();
             Console.Clear();
         }
