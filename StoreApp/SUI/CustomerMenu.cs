@@ -277,13 +277,13 @@ namespace SUI
 
         public void LocationHistory(){
             Console.Clear();
-            Console.WriteLine("|=============================================|");
-            Console.WriteLine("|         --Your Location History--           |");
-            Console.WriteLine("|---------------------------------------------|");
-            Console.WriteLine("|      Store Name      |    Store Location    |");
-            Console.WriteLine("|---------------------------------------------|");
+            Console.WriteLine("|==========================================================|");
+            Console.WriteLine("|                  --Your Location History--               |");
+            Console.WriteLine("|----------------------------------------------------------|");
+            Console.WriteLine("|         Store Name         |        Store Location       |");
+            Console.WriteLine("|----------------------------------------------------------|");
             _storeBL.getLocationHistory(_customer);
-            Console.WriteLine("|=============================================|");
+            Console.WriteLine("|==========================================================|");
             Console.WriteLine("");
             Console.WriteLine("Press any key to continue.");
             Console.ReadLine();

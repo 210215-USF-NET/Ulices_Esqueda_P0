@@ -153,13 +153,20 @@ namespace SUI
             Console.Clear();
             OrderItem newOrderItem = new OrderItem();
             bool productTruth = true;
+            Console.WriteLine("|" + addDynamicString(68, "=") + "|");
+            Console.WriteLine("|" + addDynamicString(68, " ") + "|");
+            Console.WriteLine("|" + addDynamicString(68, "-") + "|");
+            Console.WriteLine("|     Product Name     |     Product Price    |   Product Quantity   |");
+            Console.WriteLine("|" + addDynamicString(68, "-") + "|");
+            _storeBL.getStoreInventory(_store);
+            Console.WriteLine("|" + addDynamicString(68, "=") + "|");
             do {
-                Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                Console.WriteLine("------------------------------------------------------------");
                 Console.WriteLine("Enter the item you would like to add: ");
                 _product = _storeBL.getStoreProductByName(Console.ReadLine(), _store);
                 Console.WriteLine("");
                 if (_product == null){
-                    Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("---------------------------------------------------------");
                     Console.WriteLine("This item is not available in this store.");
                     Console.WriteLine("Maybe try another store or check your spelling.");
                     Console.WriteLine("");
@@ -170,11 +177,26 @@ namespace SUI
                 }
             } while(!productTruth);
             newOrderItem.Product = _product;
-                
-             //TODO: Input Validation
-            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
-            Console.WriteLine($"Enter the quantity you would like to add of { _product.ProductName }: ");
-            newOrderItem.ProductQuantity = int.Parse(Console.ReadLine());
+            
+            int result = 0;
+            do {
+                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine($"Enter the quantity you would like to add of { _product.ProductName }: ");
+                string userInput = Console.ReadLine();
+                int storeItemQuantity = _storeBL.getInventoryQuantity(_product, _store);
+                if(int.TryParse(userInput, out result) && result > 0 && result <= storeItemQuantity){
+                    newOrderItem.ProductQuantity = result;
+                    StoreInventory newStoreInventory = _storeBL.getInventoryItem(_product, _store);
+                    newStoreInventory.InventoryQuantity = storeItemQuantity - result;
+                    _storeBL.updateStoreInventory(newStoreInventory);
+                    productTruth = false;
+                }
+                else{
+                    productTruth = true;
+                    Console.WriteLine("Please enter a valid integer.");
+                }
+                Console.WriteLine("");
+            } while(productTruth);
             Console.WriteLine("");
             Console.Clear();
             return newOrderItem;
@@ -190,11 +212,13 @@ namespace SUI
         }
         public void getInventory(){
             Console.Clear();
-            Console.WriteLine("====================================================================================================");
-            Console.WriteLine("");
+            Console.WriteLine("|" + addDynamicString(68, "=") + "|");
+            Console.WriteLine("|" + addDynamicString(68, " ") + "|");
+            Console.WriteLine("|" + addDynamicString(68, "-") + "|");
+            Console.WriteLine("|     Product Name     |     Product Price    |   Product Quantity   |");
+            Console.WriteLine("|" + addDynamicString(68, "-") + "|");
             _storeBL.getStoreInventory(_store);
-            Console.WriteLine("");
-            Console.WriteLine("====================================================================================================");
+            Console.WriteLine("|" + addDynamicString(68, "=") + "|");
             Console.WriteLine("Please push any button to continue: ");
             Console.ReadLine();
             Console.Clear();

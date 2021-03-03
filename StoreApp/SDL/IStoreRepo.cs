@@ -6,7 +6,6 @@ namespace SDL
 {
     public interface IStoreRepo
     {
-        List<Product> getInventory(Store store);
         void getOrderHistory(Customers customer);
         void getOrderHistory(Customers customer, int number);
         void getOrderHistory(Store store, int number);
@@ -25,6 +24,7 @@ namespace SDL
         void getAllProducts();
         void getAllStoreNames(Manager manager);
         void updateOrderTotal(Orders total);
+        void updateStoreInventory(StoreInventory storeInventory);
         Store getStoreByName(String storeName);
         Product getProductByName(String productName);
         Product getStoreProductByName(String productName, Store store);
@@ -33,5 +33,7 @@ namespace SDL
         OrderItem getMostRecentOrderItem();
         Manager getManagerByFirstName(String managerName);
         bool checkStoreInventory(Store store);
+        int getInventoryQuantity(Product product, Store store);
+        StoreInventory getInventoryItem(Product product, Store store);
     }
 }

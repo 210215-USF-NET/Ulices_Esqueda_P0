@@ -12,10 +12,6 @@ namespace SBL
         public StoreBL(IStoreRepo repo){
             _repo = repo;
         }
-
-        public List<Product> getInventory(Store store){
-            return _repo.getInventory(store);
-        }
         public void getOrderHistory(Customers customer){
             _repo.getOrderHistory(customer);
         }
@@ -135,5 +131,19 @@ namespace SBL
             return _repo.checkStoreInventory(store);
         }
 
+        public int getInventoryQuantity(Product product, Store store)
+        {
+            return _repo.getInventoryQuantity(product, store);
+        }
+
+        public void updateStoreInventory(StoreInventory storeInventory)
+        {
+            _repo.updateStoreInventory(storeInventory);
+        }
+
+        public StoreInventory getInventoryItem(Product product, Store store)
+        {
+            return _repo.getInventoryItem(product, store);
+        }
     }
 }

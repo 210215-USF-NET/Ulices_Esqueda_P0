@@ -16,11 +16,6 @@ namespace SDL
             _context = context;
             _mapper = mapper;
         }
-        public List<Model.Product> getInventory(Model.Store store)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void getLocationHistory(Model.Customers customer)
         {
             var queryCustomerLocationHistory = (
@@ -30,17 +25,16 @@ namespace SDL
                 select new {store.StoreName, store.StoreLocation}
             ).Distinct();
             if(!queryCustomerLocationHistory.Any()){
-                Console.WriteLine("Seems like you haven't visited any stores.");
-                Console.WriteLine("Please visit a shop and see what they have to offer!");
+                Console.WriteLine("| Seems like you haven't visited any stores.               |");
+                Console.WriteLine("| Please visit a shop and see what they have to offer!     |");
             }
             else {
                 foreach (var item in queryCustomerLocationHistory)
                 {
-                    Console.WriteLine("| {0, -20} | {1, 20} |", item.StoreName, item.StoreLocation);
+                    Console.WriteLine("| {0, -26} | {1, 27} |", item.StoreName, item.StoreLocation);
                 }
             }
         }
-
         public void getAllStoreNames(){
             var queryAllStoreLocations = (
                 from store in _context.Stores
@@ -71,8 +65,8 @@ namespace SDL
                 select new {track.OrderId, order.OrderDate, order.OrderTotal}
             ).Distinct();
             if (!queryCustomerOrderHistory.Any()){
-                Console.WriteLine("| Seems like you haven't made an order          |");
-                Console.WriteLine("| Please visit a shop to make your first order. |");
+                Console.WriteLine("| Seems like you haven't made an order                |");
+                Console.WriteLine("| Please visit a shop to make your first order.       |");
             }
             else{
                 foreach (var item in queryCustomerOrderHistory)
@@ -92,8 +86,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderByDescending(s => s.OrderDate);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -111,8 +105,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderBy(s => s.OrderDate);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -130,8 +124,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderByDescending(s => s.OrderTotal);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -149,8 +143,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderBy(s => s.OrderTotal);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -167,8 +161,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct();
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -189,8 +183,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderByDescending(s => s.OrderDate);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -208,8 +202,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderBy(s => s.OrderDate);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -227,8 +221,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderByDescending(s => s.OrderTotal);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -246,8 +240,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct().OrderBy(s => s.OrderTotal);
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -264,8 +258,8 @@ namespace SDL
                     select new {track.OrderId, order.OrderDate, order.OrderTotal}
                 ).Distinct();
                 if (!queryCustomerOrderHistory.Any()){
-                    Console.WriteLine("| Seems like you haven't made an order          |");
-                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                    Console.WriteLine("| Seems like you haven't made an order                |");
+                    Console.WriteLine("| Please visit a shop to make your first order.       |");
                 }
                 else{
                     foreach (var item in queryCustomerOrderHistory)
@@ -293,7 +287,6 @@ namespace SDL
                 }
             }
         }
-
         public Customers getCustomerByEmail(string email){
             var queryCustomersByEmail = (from cust in _context.Customers
                                         where cust.CustomerEmail == email
@@ -303,13 +296,11 @@ namespace SDL
             }
             return _mapper.ParseCustomer(queryCustomersByEmail);
         }
-
         public void addCustomer(Customers newCustomer)
         {
             _context.Customers.Add(_mapper.ParseCustomer(newCustomer));
             _context.SaveChanges();
         }
-
         public Store getStoreByName(string storeName)
         {
             var queryStoreByName = (
@@ -321,13 +312,11 @@ namespace SDL
             }
             return _mapper.ParseStore(queryStoreByName);
         }
-
         public void addVisistedStore(LocationVisited location)
         {
             _context.LocationVisiteds.Add(_mapper.ParseLocation(location));
             _context.SaveChanges();
         }
-
         public Product getProductByName(string productName)
         {
             var queryProductByName = (
@@ -352,7 +341,6 @@ namespace SDL
             }
             return _mapper.ParseProduct(queryProductByName);
         }
-
         public void addNewOrder()
         {
             Orders order = new Orders();
@@ -361,13 +349,11 @@ namespace SDL
             _context.Orders.Add(_mapper.ParseOrder(order));
             _context.SaveChanges();
         }
-
         public void addOrderItem(OrderItem newOrderItem)
         {
             _context.OrderItems.Add(_mapper.ParseOrderItem(newOrderItem));
             _context.SaveChanges();
         }
-
         public void addTrackOrderItem(TrackOrder newTrackOrder)
         {
             _context.TrackOrders.Add(_mapper.ParseTrackOrder(newTrackOrder));
@@ -386,7 +372,6 @@ namespace SDL
             _context.Products.Add(_mapper.ParseProduct(newProduct));
             _context.SaveChanges();
         }
-
         public Orders getMostRecentOrder()
         {
             var queryMostRecentOrder = (
@@ -398,7 +383,6 @@ namespace SDL
             }
             return _mapper.ParseOrder(queryMostRecentOrder);
         }
-
         public OrderItem getMostRecentOrderItem()
         {
             var queryMostRecentOrderItem = (
@@ -414,18 +398,18 @@ namespace SDL
             var queryInventory = (
                 from inv in _context.StoreInventories
                 join prod in _context.Products on inv.ProductId equals prod.ProductId
+                where inv.InventoryQuantity > 0
+                where inv.StoreId == store.StoreID
                 select new {prod.ProductName, prod.ProductPrice, inv.InventoryQuantity}
             );
             if (!queryInventory.Any()){
-                Console.WriteLine("Sorry about that but it seems like we ran out of products.");
-                Console.WriteLine("Please come again later.");
+                Console.WriteLine("| Sorry about that but it seems like we ran out of products.         |");
+                Console.WriteLine("| Please come again later.                                           |");
             }
             else{
                 foreach (var item in queryInventory)
                 {
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
-                    Console.WriteLine($"Product: {item.ProductName}, Price: {item.ProductPrice}, Quantity: {item.InventoryQuantity}");
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("| {0, -20} | {1, -20} | {2, 20} |", item.ProductName, item.ProductPrice, item.InventoryQuantity);
 
                 }
             }
@@ -434,6 +418,7 @@ namespace SDL
             var queryInventory = (
                 from inv in _context.StoreInventories
                 join prod in _context.Products on inv.ProductId equals prod.ProductId
+                where inv.StoreId == store.StoreID
                 select new {prod.ProductName, prod.ProductPrice, inv.InventoryQuantity}
             );
             if (!queryInventory.Any()){
@@ -453,7 +438,6 @@ namespace SDL
             }
             return _mapper.ParseManager(queryManagerByFirstName);
         }
-
         public void getCustomerByName(string customerName)
         {
             var queryCustomersByName = (from cust in _context.Customers
@@ -468,7 +452,6 @@ namespace SDL
 
             }
         }
-
         public void getAllProducts()
         {
             var queryAllProducts = (
@@ -480,13 +463,37 @@ namespace SDL
                 Console.WriteLine(String.Format("| {0, -64} |", item.ProductName));
             }
         }
-
         public void updateOrderTotal(Orders orderTotalUpdate)
         {
             Entity.Order oldOrder = _context.Orders.Find(orderTotalUpdate.OrderID);
             _context.Entry(oldOrder).CurrentValues.SetValues(_mapper.ParseOrder(orderTotalUpdate));
 
             _context.SaveChanges();
+        }
+        public int getInventoryQuantity(Product product, Store store){
+            var queryInventory = (
+                from inventory in _context.StoreInventories
+                where inventory.StoreId == store.StoreID
+                where inventory.ProductId == product.ProductID
+                select inventory
+            ).ToList().FirstOrDefault();
+            StoreInventory thevalue = _mapper.ParseStoreInventory(queryInventory);
+            return thevalue.InventoryQuantity;
+        }
+        public void updateStoreInventory(StoreInventory storeInventory){
+            Entity.StoreInventory oldInventory = _context.StoreInventories.Find(storeInventory.StoreInventoryID);
+            _context.Entry(oldInventory).CurrentValues.SetValues(_mapper.ParseStoreInventory(storeInventory));
+            _context.SaveChanges();
+        }
+        public StoreInventory getInventoryItem(Product product, Store store){
+            var queryInventory = (
+                from inventory in _context.StoreInventories
+                where inventory.StoreId == store.StoreID
+                where inventory.ProductId == product.ProductID
+                select inventory
+            ).ToList().FirstOrDefault();
+            StoreInventory thevalue = _mapper.ParseStoreInventory(queryInventory);
+            return thevalue;
         }
     }
 }

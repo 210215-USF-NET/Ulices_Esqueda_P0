@@ -6,7 +6,6 @@ namespace SBL
 {
     public interface IStoreBL
     {
-        List<Product> getInventory(Store store);
         void getOrderHistory(Customers customer);
         void getOrderHistory(Customers customer, int number);
         void getOrderHistory(Store store, int number);
@@ -25,6 +24,8 @@ namespace SBL
         void getCustomerByName(String customerName);
         void getAllProducts();
         void updateOrderTotal(Orders total);
+        void updateStoreInventory(StoreInventory storeInventory);
+        StoreInventory getInventoryItem(Product product, Store store);
         Store getStoreByName(String storeName);
         Customers getCustomerByEmail(String email);
         Product getProductByName(String productName);
@@ -33,5 +34,6 @@ namespace SBL
         OrderItem getMostRecentOrderItem();
         Manager getManagerByFirstName(String managerName);
         bool checkStoreInventory(Store store);
+        int getInventoryQuantity(Product product, Store store);
     }
 }
