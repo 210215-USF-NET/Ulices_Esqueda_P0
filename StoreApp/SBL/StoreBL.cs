@@ -19,6 +19,15 @@ namespace SBL
         public void getOrderHistory(Customers customer){
             _repo.getOrderHistory(customer);
         }
+        public void getOrderHistory(Customers customer, int number){
+            _repo.getOrderHistory(customer, number);
+        }
+        public void getOrderHistory(Store store, int number){
+            _repo.getOrderHistory(store, number);
+        }
+        public void getOrderHistory(Store store){
+            _repo.getOrderHistory(store);
+        }
 
         public void getLocationHistory(Customers customer){
             _repo.getLocationHistory(customer);
@@ -125,5 +134,6 @@ namespace SBL
         {
             return _repo.checkStoreInventory(store);
         }
+
     }
 }

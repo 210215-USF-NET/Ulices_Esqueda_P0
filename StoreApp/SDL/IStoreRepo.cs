@@ -8,6 +8,9 @@ namespace SDL
     {
         List<Product> getInventory(Store store);
         void getOrderHistory(Customers customer);
+        void getOrderHistory(Customers customer, int number);
+        void getOrderHistory(Store store, int number);
+        void getOrderHistory(Store store);
         void getLocationHistory(Customers customer);
         void getAllStoreNames();
         void addVisistedStore(LocationVisited store);

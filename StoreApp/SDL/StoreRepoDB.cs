@@ -71,8 +71,220 @@ namespace SDL
                 select new {track.OrderId, order.OrderDate, order.OrderTotal}
             ).Distinct();
             if (!queryCustomerOrderHistory.Any()){
-                Console.WriteLine("Seems like you haven't made an order");
-                Console.WriteLine("Please visit a shop to make your first order.");
+                Console.WriteLine("| Seems like you haven't made an order          |");
+                Console.WriteLine("| Please visit a shop to make your first order. |");
+            }
+            else{
+                foreach (var item in queryCustomerOrderHistory)
+                {
+                    Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                }
+            }
+        }
+        public void getOrderHistory(Model.Customers customer, int number)
+        {
+            if (number == 0){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.CustomerId == customer.CustomerID
+                    orderby order.OrderDate descending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderByDescending(s => s.OrderDate);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else if (number == 1){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.CustomerId == customer.CustomerID
+                    orderby order.OrderDate ascending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderBy(s => s.OrderDate);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else if (number == 2){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.CustomerId == customer.CustomerID
+                    orderby order.OrderTotal descending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderByDescending(s => s.OrderTotal);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else if (number == 3){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.CustomerId == customer.CustomerID
+                    orderby order.OrderTotal ascending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderBy(s => s.OrderTotal);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else{
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.CustomerId == customer.CustomerID
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct();
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+        }
+        public void getOrderHistory(Store store, int number)
+        {
+            if (number == 0){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.StoreId == store.StoreID
+                    orderby order.OrderDate descending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderByDescending(s => s.OrderDate);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else if (number == 1){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.StoreId == store.StoreID
+                    orderby order.OrderDate ascending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderBy(s => s.OrderDate);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else if (number == 2){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.StoreId == store.StoreID
+                    orderby order.OrderTotal descending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderByDescending(s => s.OrderTotal);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else if (number == 3){
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.StoreId == store.StoreID
+                    orderby order.OrderTotal ascending
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct().OrderBy(s => s.OrderTotal);
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+            else{
+                var queryCustomerOrderHistory = (
+                    from track in _context.TrackOrders
+                    join order in _context.Orders on track.OrderId equals order.OrderId
+                    where track.StoreId == store.StoreID
+                    select new {track.OrderId, order.OrderDate, order.OrderTotal}
+                ).Distinct();
+                if (!queryCustomerOrderHistory.Any()){
+                    Console.WriteLine("| Seems like you haven't made an order          |");
+                    Console.WriteLine("| Please visit a shop to make your first order. |");
+                }
+                else{
+                    foreach (var item in queryCustomerOrderHistory)
+                    {
+                        Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    }
+                }
+            }
+        }
+        public void getOrderHistory(Store store)
+        {
+            var queryCustomerOrderHistory = (
+                from track in _context.TrackOrders
+                join order in _context.Orders on track.OrderId equals order.OrderId
+                where track.StoreId == store.StoreID
+                select new {track.OrderId, order.OrderDate, order.OrderTotal}
+            ).Distinct();
+            if (!queryCustomerOrderHistory.Any()){
+                Console.WriteLine("| There seems to be no orders made in your store yet. Start advertising! |");
             }
             else{
                 foreach (var item in queryCustomerOrderHistory)

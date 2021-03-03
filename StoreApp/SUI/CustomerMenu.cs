@@ -204,8 +204,74 @@ namespace SUI
             _storeBL.getOrderHistory(_customer);
             Console.WriteLine("|=====================================================|");
             Console.WriteLine("");
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadLine();
+            bool stay = true;
+            do
+            {
+                Console.WriteLine("|=====================================================|");
+                Console.WriteLine("|                                                     |");
+                Console.WriteLine("|     Please choose an option from the following:     |");
+                Console.WriteLine("|                                                     |");
+                Console.WriteLine("|-----------------------------------------------------|");
+                Console.WriteLine("|                                                     |");
+                Console.WriteLine("| [0] Display order history by order date descending  |");
+                Console.WriteLine("| [1] Display order history by order date ascending   |");
+                Console.WriteLine("| [2] Display order history by cost descending        |");
+                Console.WriteLine("| [3] Display order hsitory by cost ascending         |");
+                Console.WriteLine("| [Q] Press q to return                               |");
+                Console.WriteLine("|-----------------------------------------------------|");
+                Console.WriteLine("| Enter a number:                                     |");
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "0":
+                        Console.Clear();
+                        Console.WriteLine("|=====================================================|");
+                        Console.WriteLine("|               --Your Order History--                |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        _storeBL.getOrderHistory(_customer, int.Parse(userInput));
+                        break;
+                    case "1":
+                        Console.Clear();
+                        Console.WriteLine("|=====================================================|");
+                        Console.WriteLine("|               --Your Order History--                |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        _storeBL.getOrderHistory(_customer, int.Parse(userInput));
+                        break;
+                    case "2":
+                        Console.Clear();
+                        Console.WriteLine("|=====================================================|");
+                        Console.WriteLine("|               --Your Order History--                |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        _storeBL.getOrderHistory(_customer, int.Parse(userInput));
+                        break;
+                    case "3":
+                        Console.Clear();
+                        Console.WriteLine("|=====================================================|");
+                        Console.WriteLine("|               --Your Order History--                |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
+                        Console.WriteLine("|-----------------------------------------------------|");
+                        _storeBL.getOrderHistory(_customer, int.Parse(userInput));
+                        break;
+                    case "q":
+                    case "Q":
+                        Console.Clear();
+                        stay = false;
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Invalid input please choose from the given options.");
+                        Console.WriteLine("");
+                        break;
+                }
+            } while (stay);
             Console.Clear();
         }
 
