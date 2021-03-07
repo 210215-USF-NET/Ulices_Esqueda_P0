@@ -71,7 +71,18 @@ namespace SDL
             else{
                 foreach (var item in queryCustomerOrderHistory)
                 {
-                    Console.WriteLine(String.Format("| {0,-12} | {1, -22} | {2, 10}c |", item.OrderId, item.OrderDate, item.OrderTotal));
+                    int total = (int) item.OrderTotal;
+                    int[] money = new int[4];
+                    for (int i = 3; i >= 0; i--){
+                        if (i == 0){
+                            money[i] = total;
+                        } else{
+                            money[i] = total % 10;
+                            total = (int) total / 10;
+                        }
+                        
+                    }
+                    Console.WriteLine(String.Format("| {0,-20} | {1, -22} | {2, 3}{3, 1} {4, 3}{5, 1} {6, 3}{7, 1} {8, 3}{9, 1} |", item.OrderId, item.OrderDate, money[0], "p", money[1], "g", money[2], "s", money[3], "c"));
                 }
             }
         }

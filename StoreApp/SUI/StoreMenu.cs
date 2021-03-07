@@ -94,6 +94,7 @@ namespace SUI
         public void placeOrder(){
             Console.Clear();
             int total= 0;
+            int[] money = new int[4];
             //Make a new order with total equal to zero and date the time it was executed.
             _storeBL.addNewOrder();
             Orders order = _storeBL.getMostRecentOrder();
@@ -142,7 +143,11 @@ namespace SUI
                 }
                 count++;
             } while(stillOrdering);
-            
+            money = calculateMoney(total);
+            Console.WriteLine($"Your order total is: {money[0]} platinum, {money[1]} gold, {money[2]} silver, and {money[3]} copper");
+            Console.WriteLine("");
+            Console.WriteLine("Please press any key to continue");
+            Console.ReadLine();
             //Find out the order total and update the order total value.
             order.OrderTotal = total;
             _storeBL.updateOrderTotal(order);
@@ -269,6 +274,14 @@ namespace SUI
             int second = "Do you see anything you like? What now?".Length;
             int third = "Welcome to { _store.StoreName }. What would you like to do?".Length;
             return Math.Max(first, Math.Max(second, third));
+        }
+        public int[] calculateMoney(int total){
+            int[] money = new int[4];
+            for (int i = 3; i >= 0; i--){
+                money[i] = total % 10;
+                total = (int) total / 10;
+            }
+            return money;
         }
     }
 }

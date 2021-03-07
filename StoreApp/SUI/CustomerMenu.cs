@@ -196,13 +196,9 @@ namespace SUI
         
         public void OrderHistory(){
             Console.Clear();
-            Console.WriteLine("|=====================================================|");
-            Console.WriteLine("|               --Your Order History--                |");
-            Console.WriteLine("|-----------------------------------------------------|");
-            Console.WriteLine("| Order Number |       Order Date       | Order Total |");
-            Console.WriteLine("|-----------------------------------------------------|");
+            printOutHeaderOfOrderHistory();
             _storeBL.getOrderHistory(_customer);
-            Console.WriteLine("|=====================================================|");
+            Console.WriteLine("|=====================================================================|");
             Console.WriteLine("");
             bool stay = true;
             do
@@ -226,38 +222,22 @@ namespace SUI
                 {
                     case "0":
                         Console.Clear();
-                        Console.WriteLine("|=====================================================|");
-                        Console.WriteLine("|               --Your Order History--                |");
-                        Console.WriteLine("|-----------------------------------------------------|");
-                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
-                        Console.WriteLine("|-----------------------------------------------------|");
+                        printOutHeaderOfOrderHistory();
                         _storeBL.getOrderHistory(_customer, int.Parse(userInput));
                         break;
                     case "1":
                         Console.Clear();
-                        Console.WriteLine("|=====================================================|");
-                        Console.WriteLine("|               --Your Order History--                |");
-                        Console.WriteLine("|-----------------------------------------------------|");
-                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
-                        Console.WriteLine("|-----------------------------------------------------|");
+                        printOutHeaderOfOrderHistory();
                         _storeBL.getOrderHistory(_customer, int.Parse(userInput));
                         break;
                     case "2":
                         Console.Clear();
-                        Console.WriteLine("|=====================================================|");
-                        Console.WriteLine("|               --Your Order History--                |");
-                        Console.WriteLine("|-----------------------------------------------------|");
-                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
-                        Console.WriteLine("|-----------------------------------------------------|");
+                        printOutHeaderOfOrderHistory();
                         _storeBL.getOrderHistory(_customer, int.Parse(userInput));
                         break;
                     case "3":
                         Console.Clear();
-                        Console.WriteLine("|=====================================================|");
-                        Console.WriteLine("|               --Your Order History--                |");
-                        Console.WriteLine("|-----------------------------------------------------|");
-                        Console.WriteLine("| Order Number |       Order Date       | Order Total |");
-                        Console.WriteLine("|-----------------------------------------------------|");
+                        printOutHeaderOfOrderHistory();
                         _storeBL.getOrderHistory(_customer, int.Parse(userInput));
                         break;
                     case "q":
@@ -274,7 +254,13 @@ namespace SUI
             } while (stay);
             Console.Clear();
         }
-
+        public void printOutHeaderOfOrderHistory(){
+            Console.WriteLine("|=====================================================================|");
+            Console.WriteLine("|                       --Your Order History--                        |");
+            Console.WriteLine("|---------------------------------------------------------------------|");
+            Console.WriteLine("|    Order Number      |       Order Date       |      Order Total    |");
+            Console.WriteLine("|---------------------------------------------------------------------|");
+        }
         public void LocationHistory(){
             Console.Clear();
             Console.WriteLine("|==========================================================|");
